@@ -1,0 +1,347 @@
+%%%%% PACKAGES & ENVS %%%%%
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,amsfonts, enumitem, fancyhdr, color, comment, graphicx, environ}
+\RequirePackage{titling}
+\RequirePackage{etoolbox}
+\RequirePackage{framed}
+\RequirePackage{xcolor}
+\RequirePackage{bold-extra}
+\RequirePackage{hyperref}
+\RequirePackage{enumerate}
+\RequirePackage{multirow}
+\RequirePackage{booktabs}
+\pagestyle{fancy}
+\setlength{\headheight}{40pt}
+\newcounter{problemCounter}
+\newenvironment{problem}[1][]{\begin{shaded}\refstepcounter{problemCounter}\par\medskip
+        \noindent \textbf{Problem~\theproblemCounter. #1}}{\end{shaded}\medskip}
+\newenvironment{solution}{\textbf{Solution:}}{\qed\newpage}
+
+%%%%%% NEW COMMANDS %%%%%%%%
+
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\sk}{\smallskip}
+\newcommand{\bk}{\bigskip}
+\newcommand{\bs}{\backslash}
+\definecolor{shadecolor}{gray}{0.85}
+
+
+%%%%% HEADER %%%%%
+
+\lhead{Problem Set 6} 
+\chead{MATH 1630: Real Analysis}
+\rhead{Aly Rajwani}
+
+\graphicspath{Images/}
+
+\begin{document}
+
+\begin{problem}
+\begin{itemize}
+    \item[(a)] Let $p: X \rightarrow Y$ be a continuous map. Show that if there is a continuous map $f: Y \rightarrow X$ such that $p \circ f$ equals the identity map of Y, then $p$ is a quotient map.
+    \item[(b)] If $A \subset X$, a \textit{retraction} of $X$ onto $A$ is a continuous map $r: X \rightarrow A$, such that $r(a) = a$ for each $a \in A$. Show that a retraction is a quotient map.
+\end{itemize}
+\end{problem}
+
+\begin{solution}
+\begin{itemize}
+    \item[(a)]
+    To show $p$ is a quotient map, we must show that $p$ is a surjective, open, continuous map 
+
+    \sk
+
+    Continuity is given in the problem statement.
+
+    \sk
+    
+    To show $p$ is surjective, we must show that $\forall y \in Y, \exists x \in X$ such that $p(x) = y$. Since $f: Y \rightarrow X$, $f(y) \in X$, and since $p \circ f$ is the identity mapping, $p(f(y)) = y$. Thus, $p$ is surjective. 
+
+    \sk
+
+    To show $p$ is open, we must show that if $p^{-1}(\U)$ is open in $X$, then $\U$ is open in $Y$. Since $p \circ f$ is the identity mapping we have the following: 
+    
+    $$\U = i_Y(\U) = i_Y^{-1}(\U) = (p \circ f)^{-1}(\U) = f^{-1}(p^{-1}(\U))$$
+
+    Since $f$ is continuous, $f^{-1}$ maps open sets to open sets, and since $p^{-1}(\U)$ as assumed to be open, $\U = f^{-1}(p^{-1}(\U))$ is open. 
+
+    \item[(b)]
+    Let $f: A \rightarrow X$ be the inclusion map, which is continuous. Then $r \circ f: A \rightarrow A$ is the identity map of $A$, and so $r$ is a quotient map by part (a).
+\end{itemize}
+\end{solution}
+
+\begin{problem}
+\begin{itemize}
+    \item[(a)] Show that the polar coordinate map $f: \R^2\backslash\{0, 0\} \rightarrow (0, \infty) \times S^1$ given by 
+    $$f(x, y) = \left(\sqrt{x^2 + y^2}, \left( \frac{x}{\sqrt{x^2 + y^2}}, \frac{y}{\sqrt{x^2 + y^2}} \right)\right)$$ is a homeomorphism.
+    \item[(b)] Show that $g: \R^2 \rightarrow [0,\infty)$ given by $g(x,y) = \sqrt{x^2 +y^2}$ is an open map.
+    \item[(c)] Show that $g: \R \rightarrow \R$, $g(y) = y^2$ is not open. But $g$ is open if we consider it as a map $g: \R \rightarrow [0,\infty)$.
+    \item[(d)] Let $h: \R^2 \rightarrow \R^2$, $h(x,y) = (x+y^2, y).$ Show $h$ is a homeomorphism. conclude that $g:\R^2 \rightarrow \R$, $g(x,y) = x+y^2$ is an open map.
+\end{itemize}
+\end{problem}
+
+\begin{solution}
+    \begin{itemize}
+        \item[(a)] To show $f$ is a homeomorphism, we must show that $f$ is bijective and continuous, and that $f^{-1}$ is continuous. 
+
+        \sk
+
+        To show $f$ is injective, we suppose $f(x_1, y_1) = f(x_2, y_2)$ and show that $(x_1, y_1) = (x_2, y_2)$.
+
+        \sk
+
+        If $f(x_1, y_1) = f(x_2, y_2)$, then $\sqrt{x_1^2 + y_1^2} = \sqrt{x_2^2 + y_2^2}$. As well, $$\left(\frac{x_1}{\sqrt{x_1^2 + y_1^2}}, \frac{y_1}{\sqrt{x_1^2 + y_1^2}}\right) = \left(\frac{x_2}{\sqrt{x_2^2 + y_2^2}}, \frac{y_2}{\sqrt{x_2^2 + y_2^2}}\right)$$ This implies $\frac{x_1}{\sqrt{x_1^2 + y_1^2}} = \frac{x_2}{x_2^2 + y_2^2}$, and since the denominators are equal, the numerators must be as well, so $x_1 = x_2$. Similarly, $y_1 = y_2$. Thus, $f(x_1, y_1) = f(x_2, y_2)$ implies $(x_1, y_1) = (x_2, y_2)$, and so $f$ is injective. 
+
+        \sk
+
+        To show that $f$ is surjective, we show that $\forall (r, (\cos \theta, \sin \theta)) \in (0, \infty) \times S^1$, $\exists (x, y) \in \R^2 \backslash \{0, 0\}$ such that $f(x, y) = (r, (\cos \theta, \sin \theta))$. Let $x = r \cos \theta$ and $y = r \sin \theta$. Then \begin{align*}
+            f(x, y) &= \left(\sqrt{(r\cos\theta)^2 + (r\sin\theta)^2}, \left(\frac{r\cos\theta}{\sqrt{(r\cos\theta)^2 + (r\sin\theta)^2}}, \frac{r\sin\theta}{\sqrt{(r\cos\theta)^2 + (r\sin\theta)^2}}\right)\right) \\
+            &= \left(r, (\cos\theta, \sin\theta)\right)
+        \end{align*}
+
+        and so $f$ is surjective.
+
+        \sk
+
+        To show $f$ is continuous, we show that the preimage of a basis element is open. 
+        \begin{center}
+            \includegraphics[scale=0.075]{Images/f continuous.png}
+        \end{center}
+
+        An open set in $(0, \infty) \times S^1$ is of the above form, where $(a, \theta_1)$ uniquely determines a point $(a, (\cos\theta_1, \sin\theta_1))$, $(b, \theta_2)$ uniquely determines a point $(b, (\cos\theta_2, \sin\theta_2))$, and these points define an open set. The preimage of this set is $(a, b) \times (\theta_1, \theta_2)$, which is open in the standard topology on $\R^2\backslash\{0, 0\}$. 
+
+        \sk
+
+        To show $f^{-1}$ is continuous, we show that for any point $x \in (0, \infty) \times S^1$ and neighborhood $\V$ of $f(x)$, there is a neighborhood $\U$ of $x$ such that $f(\U) \subset \V$. 
+
+        \begin{center}
+            \includegraphics[scale = 0.075]{Images/f^-1 continuous.png}
+        \end{center}
+
+        For any $x \in (0, \infty) \times S^1$ and neighborhood of $x$ (drawn in purple), we can find an open rectangle within that neighborhood which contains $f(x)$, since $f(x)$ is equal to $(r\cos\theta, r\sin\theta)$.
+
+        \item[(b)] To show $g$ is an open map, we show that it maps open sets of $\R^2$ to open sets in $[0, \infty)$. 
+
+        \sk
+
+        For an open set $\U$, we consider two cases:
+
+        \begin{itemize}
+            \item[(1)] $0 \times 0 \in \U$
+
+            If $0 \times 0 \in \U$, then there is a $\delta > 0$ such that $\U = B((0, 0), 2\delta) \cup (\U\backslash \overline{B((0, 0), \delta)})$. Then $g(\U) = g(B((0, 0), 2\delta)) \cup g(\U\backslash \overline{B((0, 0), \delta)})$. 
+
+            \sk
+
+            $g(B((0, 0), 2\delta)) = [0, 2\delta)$ by definition, which is open in $[0, \infty)$ since $[0, 2\delta) = (-2\delta, 2\delta) \cap [0, \infty)$.
+
+            \sk
+            
+            Since $0 \times 0 \notin \U\backslash \overline{B((0, 0), \delta)}$, we view applying $g$ to this set as applying $\pi_1 \circ f$, where $\pi_1$ is the projection onto the first coordinate and $f$ is the function from part (a). Since these are both open maps and their composition is $g$, $g(\U\backslash \overline{B((0, 0), \delta)})$ is open. 
+
+            \sk
+
+            Thus, if $\U$ is open and $0 \times 0 \in \U$, then $g(\U)$ is the union of open sets, and so $g(\U)$ is open. 
+
+            \item[(2)] If $0 \times 0 \notin \U$, then we view $g$ as $\pi_1 \circ f$, and then $g(\U) = \pi_1(f(\U))$ is open, since each of $\pi_1$ and $f$ is open.
+            
+        \end{itemize}
+
+        Since these exhaust all cases and shown that $g(\U)$ is open in both, $g(\U)$ is open when $\U$ is open and so $g$ is an open map.
+
+        \item[(c)] If $g$ is defined on $\R \rightarrow \R$, then $g$ is not an open map, since $(-1, 1)$ is open in $\R$, but $g((-1, 1)) = [0, 1)$ is not open in $\R$.
+
+        \sk
+
+        If $g$ is defined on $\R \rightarrow [0, \infty)$, then $g$ is open, which we prove by considering cases for a basis element $(a, b)$ of $\R$:
+
+        \begin{itemize}
+            \item[(1)] $0 < a < b$
+
+            $g((a, b)) = (a^2, b^2)$ with $a^2 > 0$
+
+            \item[(2)] $a < b < 0$
+
+            $g((a, b)) = (b^2, a^2)$ with $b^2 > 0$
+
+            \item[(3)] $a < 0 < b$
+
+            $g((a, b)) = [0, \max(a^2, b^2)) = (-\max(a^2, b^2), \max(a^2, b^2)) \cap [0, \infty)$
+            
+            \item[(4)] $a < b = 0$
+
+            $g((a, b)) = [0, a^2) = (-a^2, a^2) \cap [0, \infty)$
+
+            \item[(5)] $0 = a < b$
+
+            $g((a, b)) = [0, b^2) = (-b^2, b^2) \cap [0, \infty)$
+        \end{itemize}
+
+        In all cases, $g(\U)$ is an open set, and thus $g$ is an open map when defined on $\R \rightarrow [0, \infty)$
+
+        \item[(d)] To show $h$ is a homeomorphism, we must show that $h$ is bijective and continuous, and that $h^{-1}$ is continuous. 
+
+        To show $h$ is injective, we suppose $h(x_1, y_1) = h(x_2, y_2)$ and show that $(x_1, y_1) = (x_2, y_2)$.
+
+        \sk
+
+        If $h(x_1, y_1) = h(x_2, y_2)$, then $(x_1 + y_1^2, y_1) = (x_2 + y_2^2, y_2)$. Immediately, we have $y_1 = y_2$, and it then follows that $x_1 = x_2$. Thus, $h$ is injective.
+
+        \sk
+
+        To show $h$ is surjective, we show that $\forall (x, y) \in \R^2, \exists (a, b) \in \R^2$ such that $h(a, b) = (x, y)$. This is true by letting $a = x-y^2$ and $b = y$. 
+
+        \sk
+
+        To show $h$ is continuous, we see that $h: \R^2 \rightarrow \R \times \R$ can be defined as $h(x, y) = (h_1(x, y), h_2(x, y))$ with $h_1(x, y) = x + y^2$ and $h_2(x, y) = y$. By elementary calculus, $h_1$ and $h_2$ are both continuous, and thus $h$ is continuous. 
+
+        \sk
+
+        To show $h^{-1}$ is continuous, we see that $h^{-1} = (x - y^2, y)$, and by the same argument as above, $h^{-1}$ is continuous.
+
+        \sk
+
+        We see that $g: \R^2 \rightarrow \R$ defined as $g(x, y) = x + y^2$ is an open map since $g = \pi_1 \circ h$, where $\pi_1$ is the projection onto the first coordinate. Since each of $\pi_1$ and $h$ are open maps, their composition $g$ is an open map. 
+    \end{itemize}
+\end{solution}
+
+\begin{problem}
+\begin{itemize}
+    \item[(a)] Define an equivalent relation on the plane $X = \R^2$ as follows:
+    $$x_0 \times y_0 \sim x_1 \times y_1 \text{ if } x_0 + y_0^2 = x_1 + y_1^2$$
+
+    Let $X^*$ be the corresponding quotient space. It is homeomorphic to a familiar space; what is it? \textit{[Hint:} Set $g(x \times y) = x+y^2.$]
+
+    \item[(b)] Repeat (a) for the equivalent relation $x_0 \times y_0 \sim x_1 \times y_1 \text{ if } x_0^2 + y_0^2 = x_1^2 + y_1^2$.
+\end{itemize}
+\end{problem}
+
+\begin{solution}
+\begin{itemize}
+    \item[(a)] Let $g(x, y) = x + y^2 \in \R$. Then $g$ is surjective, since $\forall x \in \R, g(x, 0) = x$, and by elementary calculus, since $g$ is the sum of polynomials it is continuous. We also proved that $g$ is open in part (d) of question 2, so $g$ is a quotient map. By the given corollary, $g$ induces a function $f: X^* \rightarrow \R$ which is a homeomorphism, and so $X^*$ is homeomorphic to $\R$.
+
+    \item[(b)] Let $g(x, y) = x^2 + y^2 \in [0, \infty)$. Then $g$ is surjective, since $\forall x \in [0, \infty), g(\sqrt{x}, 0) = x$, and by elementary calculus, since $g$ is the sum of polynomials it is continuous. If we let $h: [0, \infty) \rightarrow [0, \infty)$ be defined by $h(x) = x^2$, then $h$ is a homeomorphism. We proved in part (b) of question 2 that $f: \R^2 \rightarrow [0, \infty)$ where $f(x, y) = \sqrt{x^2 + y^2}$ is open, and since $g = h \circ f$ where $h$ and $f$ are both open, $g$ is open. Since $g$ is surjective, continuous, and open, it is a quotient map. By the given corollary, $g$ induces a function $f: X^* \rightarrow [0, \infty)$ which is a homeomorphism, so $X^*$ is homeomorphic to $\R$.
+\end{itemize}
+    
+\end{solution}
+
+\begin{problem}
+
+\bk
+
+\noindent Let $A$ be a proper subset of $X$, and let $B$ be a proper subset of $Y$. If $X$ and $Y$ are connected, show that $$(X \times Y) - (A \times B)$$ is connected.
+\end{problem}
+
+\begin{solution}
+
+\noindent We will make use of the following facts:
+\begin{itemize}
+    \item[(1)] If $X$ and $Y$ are homeomorphic and $X$ is connected, then $Y$ is connected.  
+    \item[(2)] If connected subspaces of $X$ have a point in common, their union is connected. 
+\end{itemize}
+
+\noindent Let $u \in X \bs A$ and $v \in Y \bs B$. Then, since $u \times Y$ is homeomorphic to $Y$ and $Y$ is connected, $u \times Y$ is connected. Similarly, $X \times v$ is connected. 
+
+\sk
+
+\noindent For any $x \in X$, $x \times Y$ is homeomorphic to $Y$, and so $x \times Y$ is connected for $x \in X \bs A$. Similarly, $X \times y$ is connected for $y \in Y \bs B$. 
+
+\sk
+
+\noindent Since $u \times Y$ and $X \times y$ are connected and have the point $u \times y$ in common, $(u \times Y) \cup (X \times y)$ is connected. Similarly, $(x \times Y) \cup (X \times v)$ is connected.
+
+\sk
+
+\noindent For any $x \in X \bs A$ and $y \in Y \bs B$, the spaces $(u \times Y) \cup (X \times y)$ and $(x \times Y) \cup (X \times v)$ are connected and have the point $u \times v$ is common, so the union $[(u \times Y) \cup (X \times y)] \cup [(x \times Y) \cup (X \times v)]$ is connected.
+
+\sk
+
+\noindent Since this is true for arbitrary $x \in X \bs A$ and $y \in Y \bs B$, we have that the following union shares the point $u \times v$, and so is connected:
+
+$$\bigcup_{x \in X\bs A, y \in Y \bs B} [(u \times Y) \cup (X \times y)] \cup [(x \times Y) \cup (X \times v)]$$
+
+\sk
+
+\noindent Since $(X \times Y) - (A \times B)$ is equivalent to $[X \times (Y \bs B)] \cup [(X \bs A) \times Y]$, and we have just shown that this set is connected, $(X \times Y) - (A \times B)$ is connected is $X$ and $Y$ are connected.
+
+
+\end{solution}
+
+\begin{problem}
+
+\bk
+
+\noindent Let $f: S^1 \rightarrow \R$ be a continuous map. Show there exists a point $x$ of $S^1$ such that $f(x) = f(-x)$.
+\end{problem}
+
+\begin{solution}
+    
+    
+\noindent We define $g$ to be $f(x) - f(-x)$, and since $f$ is continuous, $g$ is continuous. If $g(x) = 0$ for all $x \in S^1$, then we are done, since $g(x) = f(x) - f(-x) = 0$ implies $f(x) = f(-x)$.
+
+\sk
+
+\noindent So, without loss of generality, assume there is some $x \in S^1$ such that $g(x) > 0$. Then $g(-x) = f(-x) - f(x) = -(f(x) - f(-x)) = -g(x) < 0$. Since $g$ is continuous, by the Intermediate Value Theorem, since $0 \in [-g(x), g(x)]$, there must be some $y \in S^1$ satisfying $g(y) = 0$. For such a $y$, $f(y) = f(-y)$.
+\end{solution}
+
+\begin{problem}
+\noindent    Assume that $\R$ is uncountable. Show that if $A$ is a countable subset of $\R^2$ then $\R^2 - A$ is path connected. [\textit{Hint:} How many lines are there passing through a given point of $\R^2$?]
+\end{problem}
+
+\begin{solution}
+
+\noindent For a given point in $\R^2$, a line passing through it can be characterized by the angle it makes with the horizontal line passing through the point. So, the set of lines passing through a given point in $\R^2$ is uncountable, since the set of possible angles is $[0, 2\pi)$, which is uncountable. 
+
+\sk
+
+\noindent Let $x_1, x_2 \in \R^2 - A$. Since $A$ is a countable subset, and since there are uncountably many lines passing through each of $x_1$ and $x_2$, let $\ell_1$ be a line passing through $x_1$ that does not intersect $A$, and let $\ell_2$ be a line passing through $x_2$ that does not intersect $A$, but intersects $\ell_1$. Since there is an uncountable number of such lines, we can find a pair $\ell_1$ and $\ell_2$ that intersect each other. Thus, a path from $x_1$ to $x_2$ in $\R^2 - A$ is the path starting from $x_1$, moving to the intersection of $\ell_1$ and $\ell_2$, and then moving to $x_2$. Since $x_1$ and $x_2$ were arbitrary points in $\R^2 - A$, we have shown that $\R^2 - A$ is path connected. 
+\end{solution}
+
+\begin{problem}
+\noindent    Show that if $U$ is an open connected subspace of $\R^2$, then $U$ is path connected. [\textit{Hint:} Show that given $x_0 \in U$, the set of points that can be joined to $x_0$ by a path in $U$ is both open and closed in $U$.]
+\end{problem}
+
+\begin{solution}
+
+\noindent Per the hint, fix some $x_0 \in U$, and let $L = \{x \in U : \text{$x$ can be joined to $x_0$ by a path in $U$}\}$. We show that $L$ is both open and closed in $U$. Since $U$ is connected, this will imply that $L = U$ or $L = \emptyset$.
+
+\sk
+
+\noindent To show that $L$ is open, we show that for $x \in L$, there is some ball $B(x, \epsilon)$ around $x$ such that $B(x, \epsilon) \subset L$. $x \in L$ implies $x \in U$, and since $U$ is an open subspace of $\R^2$, we have that there exists a $B(x, \epsilon) \subset U$. For any $y \in B(x, \epsilon)$, $y$ is path connected to $x$, and since $x$ is path connected to $x_0$ by definition, $y$ is path connected to $x_0$, and so $y \in L$. Thus, $B(x, \epsilon) \subset L$, and so $L$ is open.
+
+\sk
+
+\noindent To show that $L$ is closed in $U$, let $x \in U \bs L$ and let $B(x, \epsilon)$ be contained in $U$. Then if $y \in B(x, \epsilon)$, $y$ cannot be joined to $x_0$ by a path, since if it could then $x$ could be joined to $x_0$, and so $x \in L$, which is a contradiction. So $B(x, \epsilon) \subset U\bs L$, and so $U \bs L$ is open, so $L$ is closed in $U$
+
+\sk
+
+\noindent Since $L$ is open, closed, and non-empty ($x_0$ is path connected to itself), $L = U$, and since $L$ is path connected, $U$ is path connected.
+\end{solution}
+
+\begin{problem}
+\noindent What are the components and path components of $\R_\ell$? What are the continuous maps $f: \R \rightarrow \R_\ell$?
+\end{problem}
+
+\begin{solution}
+
+
+\noindent Suppose $A$ be a non-empty, connected subspace of $\R_\ell$ and let $a \in A$. Then $[a, \infty) \cap A$ is non-empty, open, and closed in $A$, so $[a, \infty) \cap A = A$. So, if $b \in A$, then $b \geq a$. Similarly, $a \geq b$. Thus, $A = \{a\}$. So, the only components of $\R_\ell$ are the singleton sets. 
+
+\sk
+
+\noindent Since each path component is contained in some component, and the only components are singleton sets, the path components must be singleton sets as well, since singleton sets are trivially path connected.
+
+\sk
+
+\noindent Since $\R$ is connected, $f(\R)$ must be connected as well, but since the only connected sets in $\R_\ell$ are singleton sets, the only continuous functions from $\R$ to $\R_\ell$ are constant functions. 
+\end{solution}
+
+\end{document}

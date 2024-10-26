@@ -1,0 +1,101 @@
+\documentclass{hmwk}
+
+\hdr{Problem Set 7}{MATH 1630: Real Analysis}{Aly Rajwani}
+\hwk{7}
+
+\begin{document}
+\maketitle
+
+\begin{problem}{Exercise 26.2}
+    \begin{itemize}
+        \item[(a)] Show that in the finite complement topology on $\R$, every subspace is compact
+        \item[(b)] If $\R$ has the topology consisting of all sets $A$ such that $\R - A$ is either countable or all of $\R$, is $[0, 1]$ a compact subspace?
+    \end{itemize}
+\end{problem}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{problem}{Exercise 26.4}
+
+    \ss
+    \noindent Show that every compact subspace of a metric space is bounded in that metric and is closed. Find a metric space in which not every closed bounded subspace is compact.
+\end{problem}
+
+\begin{solution}
+    
+\end{solution}
+
+\begin{problem}{Exercise 26.7}
+
+    \ss
+    \noindent Show that if $Y$ is compact, then the projection $\pi_1: X \times Y \rarr X$ is a closed map. 
+\end{problem}
+
+\begin{solution}
+    
+\end{solution}
+
+\begin{problem}{Exercise 27.2}
+    \ss
+    \noindent Let $X$ be a metric space with metric $d$; let $A \subset X$ be nonempty. 
+    \begin{itemize}
+        \item[(a)] Show that $d(x, A) = 0$ if and only if $x \in \bar{A}$.
+        \item[(b)] Show that if $A$ is compact, $d(x, A) = d(x, a)$ for some $a \in A$. 
+        \item[(c)] Define the $\epsilon-$neighborhood of $A$ in $X$ to be the set $$U(A, \epsilon) = \{x | d(x, A) < \epsilon\}.$$ Show that $U(A, \epsilon)$ equals the union of open ball $B_d(a, \epsilon)$ for $a \in A$. 
+        \item[(d)] Assume that $A$ is compact; let $U$ be an open set containing $A$. Show that some $\epsilon-$neighborhood of $A$ is contained in $U$.
+        \item[(e)] Show that the result in (d) need not hold if $A$ is closed but not compact. 
+    \end{itemize}
+\end{problem}
+
+\begin{solution}
+    
+\end{solution}
+
+\begin{problem}{Exercise 28.7}
+
+    \ss
+    \noindent Let $(X, d)$ be a metric space. If $f$ satisfies the condition $$d(f(x), f(y)) < d(x, y)$$ for all $x, y \in X$ with $x \neq y$, then $f$ is called a \textit{\textbf{shrinking map}}. If there is a number $\alpha < 1$ such that $$d(f(x), f(y)) < \alpha d(x, y)$$ for all $x, y \in X$, then $f$ is called a \textit{\textbf{contraction}}. A \textit{\textbf{fixed point}} of $f$ is a point $x$ such that $f(x) = x$.
+    \begin{itemize}
+        \item[(a)] If $f$ is a contraction and $X$ is compact, show $f$ has a unique fixed point. [\textit{Hint:} Define $f^1 = f$ and $f^{n+1} = f \circ f^n$. Consider the intersection $A$ of the sets $A_n = f^n(X)$.]
+        \item[(b)] Show more generally that if $f$ is a shrinking map and $X$ is compact, then $f$ has a unique fixed point. [\textit{Hint:} Let $A$ be as before. Given $x \in A$, choose $x_n$ so that $x = f^{n+1}(x_n)$. If $a$ is a limit point of some subsequence of the sequence $y_n = f^n(x_n),$ show $a \in A$ and $f(a) = x$. Conclude that $A = f(A)$, so that diam $A = 0$.]
+        \item[(c)] Let $X = [0, 1]$. Show that $f(x) = x - x^2/2$ maps $X$ into $X$ and is a shrinking map that is not a contraction. [\textit{Hint:} Use the mean-value-theorem of calculus.]
+        \item[(d)] The result in (a) holds if $X$ is a complete metric space, such as $\R$; see the exercises of $\S 43$. The result in (b) does not: Show that the map $f: \R \rarr \R$ given by $f(x) = [x + (x^2 + 1)^{1/2}]/2$ is a shrinking map that is not a contraction and has no fixed point. 
+    \end{itemize}
+\end{problem}
+
+\begin{solution}
+    
+\end{solution}
+
+\begin{problem}{Exercise S1}
+    \begin{itemize}
+        \item[(a)] It follows from the Tychonoff Theorem that the countable product $[0, 1]^\N$ is compact in the product topology. Prove this directly by verifying sequential compactness. 
+        \item[(b)] Now consider $X = [0, 1] \times [0, 1] \times \dots $ with the uniform $(\ell^\infty)$ metric. $$d(x, y) = \sup_{m \geq 1}|x_m - y_m|$$. Show that $X$ is not compact, and in fact no closed ball is either (a closed ball is $\{x \in X : d(x, x_0) \leq r\}$ for some $x_0 \in X$ and $r > 0$)
+        \item[(c)] Conclude $X$ in (b) is not locally compact. 
+        \item[(d)] Show that the countable product $[0, 1] \times [0, \frac{1}{2}] \times [0, \frac{1}{3}] \times \dots $ with the uniform ($\ell^\infty$) metric is compact. Thus, there are "infinite dimensional" compact subsets. 
+    \end{itemize}
+\end{problem}
+
+\begin{solution}
+    
+\end{solution}
+
+\begin{problem}{Exercise 29.3}
+
+    \ss
+    \noindent Let $X$ be a locally compact space. If $f: X \rarr Y$ is continuous, does it follow that $f(X)$ is locally compact? What if $f$ is both continuous and open? Justify your answer. 
+\end{problem}
+
+\begin{solution}
+    
+\end{solution}
+
+\begin{problem}{Exercise 29.6}
+
+    \ss
+    \noindent
+    Show that the one-point compactification of $\R$ is homeomorphic with the circle $S^1$.
+\end{problem}
+\end{document}

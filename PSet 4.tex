@@ -1,0 +1,124 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{tikz}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\V}{\mathcal{V}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\sk}{\smallskip}
+
+\title{PSet 4}
+\author{Aly Rajwani}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+    \item \textbf{Exercise 18.2}
+    
+    We will prove that this is false by counterexample. Let $f: X \rightarrow Y$ be the constant function defined as $f(X) = \{y_0\}$ for some $y_0 \in Y$. 
+    
+    \sk
+    
+    Consider some open set $V \subset Y$. Then $f^{-1}(V) = X$ if $y_0 \in V$ and $f^{-1}(V) = \emptyset$ if $y_0 \notin V$. Thus, $f$ is a continuous function. 
+    
+    \sk
+    
+    Let $A \subset X$, and let $x$ be a limit point of $A$. Then $f(A) = \{y_0\}$ and $f(x) = y_0$. Let $\U$ be a neighborhood of of $f(x)$. Then $\U \cap f(A) = \U \cap \{y_0\}$, and so $(\U \cap f(A))\backslash \{y_0\} = \emptyset$. Thus, $f(x)$ is not a limit point of $f(A)$, since we have found a neighborhood $\U \subset Y$ such that $\left(\U \cap f\left(A\right)\right)\backslash\{f(x)\} = \emptyset$.
+    
+    \item \textbf{Exercise 18.11}
+
+    $F: X \times Y \rightarrow Z$ is continuous in each variable if $\forall y_0 \in Y, h(x) = F(x \times y_0)$ is continuous and $\forall x_0 \in X, k(x) = F(x_0 \times y)$ is continuous. We are given that $F$ is continuous, and wish to show that $F$ is continuous in each variable. 
+
+    \sk
+    
+    Since $F$ is continuous, we have that $\forall x\times y \in X \times Y$ and $\forall \V \subset Z$ around $F(x\times y)$, $\exists \U \subset X \times Y$ such that $F(\U) \subset V$. 
+
+    \sk
+
+    We want to show that $\forall x \in X$ and $\forall \V \subset Z$ around $h(x), \exists \U \subset X$ such that $h(\U) \subset \V$.
+
+    \sk
+
+    Fix any $y_0 \in Y$. Since $F$ is continuous, we have that $\forall x \times y_0 \in X \times Y$ and $\forall V \subset Z$ around $F(x \times y_0), \exists \U \subset X \times Y$ such that $F(\U) \subset V$. By definition of the product topology, we can find an open set $\U_x$ of $X$ and an open set $\U_y$ of $Y$ such that $x \times y_0 \in \U_x \times \U_y \subset \U$.
+
+    \sk
+
+    We then have the following:
+
+    $$h(\U_x) = F(\U_x \times \{y_0\}) \subset F(\U_x \times \U_y) \subset F(\U)$$
+
+    Then, since $F$ is continuous, for such a $\U$ we have that 
+    
+    $$F(\U) \subset V$$
+
+    Connecting it all together, we have that $h(\U_x) \subset V$, which implies that $h$ is continuous.
+
+    \sk
+
+    The proof that $k$ is continuous is analogous.
+    
+    \item \textbf{Exercise 18.12}
+    \begin{enumerate}
+        \item To show that $F$ is continuous in each variable separately, we will show that the functions $h: \R \rightarrow \R, h(x) = F(x \times y_0)$ and $k: \R \rightarrow \R, k(y) = F(x_0 \times y)$ are continuous. 
+
+        \sk 
+
+        Fix any $y_0 \in \R$. Then we have two cases depending on whether $y_0 = 0$.
+
+        \sk 
+
+        If $y_0 = 0$, then $h(x) = F(x \times 0) = 0$, and constant functions are continuous. 
+
+        \sk 
+
+        If $y_0 \neq 0$, then $h(x) = F(x \times y_0) = \frac{xy_0}{x^2+y_0^2}$. Since this is the quotient of two continuous functions, and since the denominator cannot be 0, this function is continuous. 
+
+        \sk
+
+        In either case, $h$ is continuous.
+
+        \sk 
+
+        The proof that $k$ is continuous is analogous. Thus, $F$ is continuous in each variable separately.
+
+        \item We have $g(x) = F(x \times x)$. We can divide this into two cases, depending on whether $x = 0$. 
+
+        \sk 
+
+        If $x = 0$, then $g(x) = F(x \times x) = 0$.
+
+        \sk 
+
+        If $x \neq 0$, then $g(x) = F(x \times x) = \frac{x^2}{2x^2}$. This equals $\frac{1}{2}$ since $x \neq 0$.
+
+        \sk 
+
+        Thus $g(x) = \begin{cases}
+            \frac{1}{2} \text{ if } x \neq 0 \\
+            0 \text{ if } x = 0
+        \end{cases}$
+
+        \item The statement that $F$ is continuous is equivalent to the statement that $\forall B \subset Y$ where $B$ is closed, $F^{-1}(B) \subset X$ is closed. 
+
+        \sk 
+
+        Take $B = \left\{\frac{1}{2}\right\}$. $B$ is closed in the standard topology on $\R$. $F^{-1}(B) = \R\backslash\{0\}$ as seen in part (b). However, $\R\backslash\{0\}$ is not closed. Consider and neighborhood $(a, b)$ around $0$. Then $(a, b) \cap \R\backslash\{0\} \neq \emptyset$, and so $0$ is a limit point of $\R\backslash\{0\}$. Thus, $\overline{\R\backslash\{0\}} \neq \R\backslash\{0\}$, so $\R\backslash\{0\}$ is not closed. 
+
+        \sk
+
+        We have found a closed set $B$ whose preimage under $F$ is not closed, and so $F$ is not continuous. 
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}

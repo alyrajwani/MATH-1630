@@ -1,0 +1,195 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\title{PSet 2}
+\author{Aly Rajwani}
+\date{September 2024}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+    \item \textbf{Exercise 3.2.11}
+    \begin{enumerate}
+        \item Let $x \in \overline{A\cup B}$. Then $x \in A \cup B$ or $x$ is a limit point of $A \cup B$. If $x \in A \cup B$, then either $x \in A$ or $x \in B$, so $x \in \overline{A}$ or $x \in \overline{B}$, so $x \in \overline{A} \cup \overline{B}$. Otherwise, if $x$ is a limit point of $A \cup B$, we have that $\forall \epsilon > 0, B_\epsilon(x) \backslash \{x\} \cap (A \cup B) \neq \emptyset$. 
+
+        \smallskip
+        
+
+        $B_\epsilon(x) \backslash \{x\} \cap (A \cup B) = (B_\epsilon(x) \cap A) \cup (B_\epsilon(x) \cap B)$, which implies that $\forall \epsilon > 0$, $x$ is a limit point of $A$ or $x$ is a limit point of $B$, and so $x \in \overline{A} \cup \overline{B}$. Since $x$ was arbitrary, we have $\overline{A \cup B} \subseteq \overline{A} \cup \overline{B}$
+
+        \smallskip
+
+        Let $x \in \overline{A} \cup \overline{B}$. Then $x \in \overline{A}$ or $x \in \overline{B}$. WLOG assume $x \in \overline{A}$. Then $x \in A$ or $x$ is a limit point of $A$. If $x \in A$, then $x \in A \cup B$ implies $x \in \overline{A \cup B}$. If $x$ is a limit point of $A$, the $\forall \epsilon > 0, B_\epsilon(x) \backslash \{x\} \cap A \neq \emptyset$. This implies that $(B_\epsilon(x) \backslash \{x\} \cap A) \cup (B_\epsilon(x) \backslash \{x\} \cap B) = B_\epsilon(x) \backslash \{x\} \cap (A \cup B) \neq \emptyset$, but this means that $x$ is a limit point of $A \cup B$, and so $x \in \overline{A \cup B}$. Since $x$ was arbitrary, we have that $\overline{A} \cup \overline{B} \subseteq \overline{A \cup B}$.
+
+        \smallskip
+
+        These two conclusions together imply that $\overline{A} \cup \overline{B} = \overline{A \cup B}$
+
+        \item However, this does not imply that $\bigcup_{n \in \mathbf{N}} \overline{A_n} = \overline{\bigcup_{n \in \mathbf{N}} A_n}$, since we can define each $A_n$ to be a singleton set $\{a_n\}$ with $(a_n) \rightarrow a$. Then $a$ would be in the closure of the union, but $a$ would not be in the union of the closures.
+
+        \smallskip
+
+        As an example, take $A_n = \left\{\frac{1}{n}\right\}$. Then $\bigcup_{n \in \mathbf{N}} \overline{A_n} = \left\{ \frac{1}{n}\right\}$, but $\overline{\bigcup_{n \in \mathbf{N}} A_n} = \left\{\frac{1}{n}\right\} \cup \{0\}$
+    \end{enumerate}
+
+    \item \textbf{Exercise 3.2.12}
+
+     We will prove this by contradiction. Suppose $B$ is empty. Then $\forall s \in \mathbf{R}$, $\left\{x \in A : x < s \right\}$ is countable, and $\left\{x \in A : x > s \right\}$ is countable. However, $\left\{x \in A : x < s \right\} \cup \{s\} \cup \left\{x \in A : x > s \right\} = A \cup \{s\}$ would then be countable, which is a contradiction. 
+
+     \smallskip
+
+     We will prove the second half directly, showing that $\forall s \in B, \exists\epsilon>0$ s.t. $B_\epsilon(s) \subseteq B$. Consider some $s \in B$. Then $\left\{x \in A : x < s\right\}$ and $\left\{ x \in A : x > s\right\}$ are uncountable.
+     
+     \smallskip 
+     
+     Clearly $\left\{x \in A : x < s + \epsilon \right\}$ is uncountable. 
+     
+     \smallskip
+     
+     Next we consider $\left\{x\in A : x < s - \epsilon\right\}$. If this set were countable, then we would have $(-\infty, s) \cap A = \bigcup_{n\in \mathbf{N}} (-\infty, s - \frac{1}{n}) \cap A$ is countable, but this is a contradiction. Thus, $\left\{x\in A : x < s - \epsilon\right\}$ must be uncountable. 
+
+     \smallskip
+
+     Next, $\left\{x \in A : x > s - \epsilon\right\}$ is clearly uncountable.
+
+     \smallskip
+
+     Finally, we consider $\left\{x \in A : x > s + \epsilon\right\}$. If this set were countable, then we would have $(s, \infty) \cap A = \bigcup_{n \in \mathbf{N}} (s + \frac{1}{n}, \infty) \cap A$ is countable, but this is a contradiction. Thus, $\left\{x \in A : x > s + \epsilon\right\}$ must be uncountable. 
+
+     \smallskip
+
+     These 4 sets being uncountable prove that $\forall s\in B,  \exists \epsilon > 0$ s.t. $B_\epsilon(s) \subseteq B$, and so $B$ is open.  
+
+     \item \textbf{Exercise 3.2.13}
+
+     First, we will show that both $\mathbf{R}$ and $\emptyset$ are both open and closed, and then we will show by contradiction that no other set can be both open and closed. 
+
+     \smallskip
+
+     Any sequence of numbers $(a_n)$ that converges will converge in $\mathbf{R}$, and since a point $a$ is a limit point of $\mathbf{R}$ iff there is a sequence in $\mathbf{R}$ that converges to $a$, we have that $\mathbf{R}$ contains all its limit points. Thus, $\mathbf{R}$ is closed. Similarly, for any $x \in \mathbf{R}$, the $\epsilon$-ball around $x$ is defined as $B_\epsilon(x) = \{a \in \mathbf{R} : |x - a| < \epsilon\}$, and by definition, this set is contained in $\mathbf{R}$. Thus, $\mathbf{R}$ is open. 
+
+     \smallskip
+
+     Next, consider the empty set. Since the empty set is the complement of $\mathbf{R}$, and $\mathbf{R}$ is open, $\emptyset$ is closed. Similarly, since $\mathbf{R}$ is closed, $\emptyset$ is open. 
+
+     \smallskip
+
+     Next, consider a set $A$ that is both open and closed, but $A \neq \mathbf{R}$ and $A \neq \emptyset$. Then, $\exists a \in A$ and $\exists b \notin A$ satisfying $a < b$. If, this is not satisfied, choose $A = A^c$ instead. 
+
+     \smallskip
+
+     The set $X = \{x \in A : x < b\}$ is non-empty since $a \in X$, and it is bounded above since $b$ is an upper bound. Thus, we can apply the least upper bound property and let $s = \text{sup }X$. Then, by definition of the supremum, we have that $\forall \epsilon > 0, \exists a \in A$ s.t. $a > s - \epsilon$. Consider the sequence defined by $a_n \in (s - \frac{1}{n}, s)$. $\forall \epsilon > 0$, choose $N > \frac{1}{\epsilon}$, then $s - \epsilon < s - \frac{1}{N} < a_n < s < s + \epsilon$, so $|a_n - s| < \epsilon$, and $(a_n) \rightarrow s$. Since $A$ is closed, it contains its limit points, and since $s$ is a limit point, $s \in A$. However, since $A$ is open, $\forall x \in A, \exists \epsilon > 0$ s.t. $B_\epsilon(x) \subseteq A$. Choose an $\epsilon$ s.t. $s + \frac{\epsilon}{2} < b$ (if no such $\epsilon$ exists, then $s = b$, which is not possible since $b \notin A$ and $s \in A$), and then $B_\epsilon(s) \subseteq A$. But this implies $s + \frac{\epsilon}{2} \in A$, so $s + \frac{\epsilon}{2} \in X$, which contradicts the fact that $s$ was an upper bound for $X$. Thus, if $A$ is open and closed, we cannot have that $\exists a \in A$ and $b \notin A$ satisfying $a < b$, but that condition is only met by $\mathbf{R}$ and $\emptyset$.
+
+     \item \textbf{3.2.15}
+     \begin{enumerate}
+         \item $[a, b] = \bigcap_{n\in\mathbf{N}} (a - \frac{1}{n}, b + \frac{1}{n})$. Consider $x \in [a, b].$ $\forall n \in \mathbf{N}, a - \frac{1}{n} < a \leq x \leq b < b + \frac{1}{n}$, so $x \in \bigcap_{n\in\mathbf{N}} (a - \frac{1}{n}, b + \frac{1}{n})$. Consider $x \in \bigcap_{n\in\mathbf{N}} (a - \frac{1}{n}, b + \frac{1}{n})$. If $x = a - \epsilon,$ then $\exists n \in \mathbf{N}$ s.t. $a - \epsilon < a - \frac{1}{n}$ and so $x \notin \bigcap_{n\in\mathbf{N}} (a - \frac{1}{n}, b + \frac{1}{n})$. So $x \geq a$. Similarly, if $x = b + \epsilon,$ then $\exists n \in \mathbf{N}$ s.t. $b + \frac{1}{n} < b + \epsilon$, so $x \notin \bigcap_{n\in\mathbf{N}} (a - \frac{1}{n}, b + \frac{1}{n})$. So, $x \leq b$. Thus, $x \in [a, b]$. This proves that the two sets are equal, and so $[a, b]$ is a $G_\delta$ set by definition. 
+
+         \item $(a, b] = \bigcup_{n\in \mathbf{N}} [a + \frac{1}{n}, b]$. Consider $x \in (a, b]$. Since this is a half-open interval, $x = a + \epsilon$ with $0 < \epsilon \leq b - a$. By this construction, $x \leq b$, and $\exists  \in \mathbf{N}$ s.t. $a + \frac{1}{n} < a + \epsilon$, so $x \in [a + \frac{1}{n}, b]$ for some $n$. Thus, $x \in \bigcup_{n\in \mathbf{N}} [a + \frac{1}{n}, b]$. Consider $x \in \bigcup_{n\in \mathbf{N}} [a + \frac{1}{n}, b]$. Then $x \leq b$ and $x > a$ since if $x \leq a$, then $\forall n \in \mathbf{N}, x \leq a < a + \frac{1}{n}$ implies that $x \notin \bigcup_{n\in \mathbf{N}} [a + \frac{1}{n}, b]$, and so $x \in (a, b]$. Thus, $(a, b]$ is an $F_\sigma$ set.
+
+         \smallskip
+
+        $(a, b] = \bigcap_{n\in\mathbf{N}} \left(a, b + \frac{1}{n}\right)$. Consider $x \in (a, b]$. Then $\forall n \in \mathbf{N}, a < x \leq b < b + \frac{1}{n}$, so $x \in \bigcap_{n\in\mathbf{N}} \left(a, b + \frac{1}{n}\right)$. Consider $x \in \bigcap_{n\in\mathbf{N}} \left(a, b + \frac{1}{n}\right)$. Clearly $x > a$. Suppose $x > b$, so $x = b + \epsilon$ for some $\epsilon > 0$. Then $\exists n \in \mathbf{N}$ s.t. $b + \frac{1}{n} < b + \epsilon$, so $x \notin \bigcap_{n\in\mathbf{N}} \left(a, b + \frac{1}{n}\right)$. Then $x \leq b$ and $x \in (a, b]$. Thus, $(a, b]$ is a $G_\delta$ set. 
+
+        \item Let $r_n$ be an enumeration of the rational numbers, which we know to be possible since $\mathbf{Q}$ is countable. Then $\mathbf{Q} = \bigcup_{n \in \mathbf{N}} [r_n, r_n]$. Each set $[r_n, r_n]$ is closed and there are countably many of them, to $\mathbf{Q}$ is the union of countably many closed sets, so $\mathbf{Q}$ is an $F_\sigma$ set. 
+
+        \smallskip
+
+        We can use De Morgan's laws to prove the opposing result for $\mathbf{I}$. $\mathbf{I} = \mathbf{Q}^c = \left(\bigcup_{n\in \mathbf{N}} [r_n, r_n] \right)^c = \bigcap_{n \in \mathbf{N}} [r_n, r_n]^c$. Since each $[r_n, r_n]$ is closed, each $[r_n, r_n]^c$ is open, so $\mathbf{I}$ is the union of countably many open sets, so $\mathbf{I}$ is a $G_\delta$ set. 
+     \end{enumerate}
+
+     \item \textbf{Exercise 3.3.7}
+     \begin{enumerate}
+        \item Consider the sum $C_1 + C_1$.
+
+        \begin{align*}
+            C_1 + C_1 &= \left(\left[0, \frac{1}{3}\right] \cup \left[\frac{2}{3}, 1\right]\right) + \left(\left[0, \frac{1}{3}\right] \cup \left[\frac{2}{3}, 1\right]\right) \\
+            &= \left[0, \frac{2}{3}\right] + \left[\frac{2}{3}, \frac{4}{3}\right] + \left[\frac{4}{3}, 2\right] \\ 
+            &= \left[0, 2\right] 
+        \end{align*}
+
+        Since $C_1 + C_1 = [0, 2]$, $\forall s \in [0, 2], \exists x, y \in C_1$ satisfying $x + y = s$. 
+
+        \smallskip
+
+        We will prove the general case by induction. Suppose that $C_n + C_n = [0, 2]$ for some $n$. Then we want to show that $C_{n+1} + C_{n+1} = [0, 2]$ as well. We will use the recursive definition for $C_{n+1}$, which is that $C_{n+1} = \frac{C_n}{3} \cup \left(\frac{2}{3} + \frac{C_n}{3}\right)$
+
+        \begin{align*}
+            3C_{n+1} + 3C_{n+1} &= \left(C_n \cup (2 + C_n)\right) + \left(C_n \cup (2 + C_n)\right) \\
+            &= \left(C_n + C_n\right) \cup \left(C_n + (2 + C_n)\right) \cup \left((2 + C_n) + (2 + C_n)\right) \\
+            &= [0, 2] \cup [2, 4] \cup [4, 6] \\
+            &= [0, 6] \\
+            C_{n+1} + C_{n+1} &= [0, 2]
+        \end{align*}
+
+        Thus, for an arbitrary $n \in \mathbf{N}$ and $s \in [0, 2]$, we can find $x_n, y_n \in C_n$ satisfying $x_n + y_n = s$
+
+        \item Since the Cantor set is compact, we can find a subsequence of $(x_n)$ denoted $(x_{n_k})$ that converges to $x$, and a subsequence of $(y_n)$ denoted $(y_{n_k})$ that converges to $y$. By the Cantor set's compactness, $x$ and $y$ are in the Cantor set, and so these subsequences product the desired numbers satisfying $x + y = s$. 
+    \end{enumerate}
+
+    \item \textbf{Exercise 3.4.4}
+
+    We can defined our modified Cantor set as follows: $C_0 = [0, 1], C_{n+1} = \frac{3C_n}{8} + \left(\frac{5}{8} + \frac{3C_n}{8}\right),$ and $C = \bigcap_{n=0}^\infty C_n$.
+
+    \begin{enumerate}
+        \item To prove this set is compact, in $\mathbf{R}$ it suffices to show that it is closed and bounded. Clearly $C$ is bounded since $C = \bigcap_{n=0}^\infty C_n \subseteq C_0 = [0, 1]$, and so it is bounded by $0$ below and $1$ above. Since $C$ is constructed as the intersection of closed sets, it too is closed. Since $C$ is closed and bounded, it is compact. 
+
+        \smallskip
+
+        A set is perfect if it is closed and contains no isolated points. We have already shown $C$ is closed, so we must only show that it contains no isolated points, which is equivalent to showing that every point is a limit point. So, we want to show that $\forall x, \forall \epsilon > 0, B_\epsilon(x) \backslash \{x\} \cap C \neq \emptyset$. Consider some point $x \in C$ and some $\epsilon > 0$. By our construction of $C$, at the $n^\text{th}$ set in the construction, we have $2^n$ sets each of length $\left(\frac{3}{8}\right)^n$. We can choose $n$ sufficiently large so that $\epsilon > \left(\frac{3}{8}\right)^n$ so that the size of each interval $I_n$ in $C_n$ is less than $\epsilon$. This implies that $\exists I_k = [a, b]$ satisfying $I_k \subseteq B_\epsilon(x)$. Since $a$ and $b$ are the endpoints of this interval, each $C_n$ contains them and so $a, b \in C$. As well, $a$ and $b$ are distinct from each other by definition, and so either $x \neq a$ or $x \neq b$, so one of $a$ or $b$ must be a member of $B_\epsilon(x) \backslash \{x\} \cap C$. Thus, every point $x$ in $C$ is a limit point, so $C$ has no isolated points, so $C$ is both closed and contains no isolated points, so it is perfect.
+
+        \item We will compute the measure of $C$ as $1 - m(C^c)$. $C_0^c$ is the empty set, $C_1^c$ is a single interval of length $\frac{1}{4}$, $C_2^c$ is $C_1^c$ as well as 2 intervals of length $\frac{1}{4} \cdot \frac{3}{8}$, and in general $C_{k+1}^c$ is $C_k^c$ as well as $2^k$ intervals of length $\frac{1}{4} \cdot \left(\frac{3}{8}\right)^k$. Computing this sum, we get \begin{align*}
+            m(C^c) &= \sum_{n=0}^\infty \frac{1}{4} \cdot 2^n \cdot \left(\frac{3}{8}\right)^n \\
+            &= \frac{1}{4}\sum_{n=0}^\infty \left(\frac{3}{4}\right)^n \\
+            &= \frac{1}{4} \cdot \frac{1}{1 - \frac{3}{4}} \\
+            &= 1
+        \end{align*}
+
+        and so $m(C) = 1 - m(C^c) = 1 - 1 = 0$.
+
+        \smallskip
+
+        To compute the dimension, we notice that if you magnify $C$ by a factor of $\frac{8}{3}$, you get two copies of $C$, which is expressed as $\left(\frac{8}{3}\right)^x = 2$, where $x$ is the dimension of $C$. Solving for $x$, we get that the dimension of the modified Cantor set is $\frac{\log2}{\log8 - \log 3}$.
+    \end{enumerate}
+
+    \item \textbf{Exercise 3.4.9}
+    \begin{enumerate}
+        \item To show $F$ is closed, we can just show $O$ is open, since $F = O^c$ and the complement of an open set is closed. $O$ is open because it is the countable union of open sets, and so $F$ must be closed. 
+
+        \smallskip
+
+        $F \subseteq \mathbf{R}$, but since every rational number $r_n \in O$, $F$ must contain no rational numbers. Thus, it contains only irrational numbers. 
+
+        \smallskip
+
+        The length of $O$ is at most the length of the sum of each $V_{\epsilon_n}(r_n)$, and so we can sum these lengths to find an upper bound. The length of $O$ is bounded above by $\sum_{n=1}^\infty \frac{1}{2^n} = 1$, and since $\mathbf{R}$ has infinite length, $O^c = F$ must be nonempty. 
+
+        \smallskip
+
+        These three facts together make $F$ a closed, nonempty set consisting of only irrational numbers. 
+
+        \item Since $\overline{\mathbf{Q}} = \mathbf{R}$, we have that any open nonempty interval contains some rational number. Since $F$ consists of only irrational numbers, $F$ cannot contain any nonempty open intervals. 
+
+        \smallskip
+
+        Pick distinct $x$ and $y$ in $F$ (so $x, y \in \mathbf{I}$), and WLOG assume $x < y$. Then, since $\overline{\mathbf{Q}} = \mathbf{R}$, we can find an $r \in \mathbf{Q}$ s.t $x < r < y$. Define $A = (-\infty, r) \cap F$ and $B = (r, \infty) \cap F$. Clearly $A \cup B \subseteq F$, since they are defined as intersections with $F$, and $F \subseteq A \cup B$ since $A$ is every element of $F$ less than $r$ and $B$ is every element in $F$ greater than $r$, and since $r \notin F$, $A \cup B \subseteq F$. Thus, $F = A \cup B$. Furthermore, $\overline{A} = (-\infty, r]$ and $\overline{B} = [r, \infty)$, so $\overline{A} \cap B = \emptyset$ and $A \cap \overline{B} = \emptyset$. Thus, $F$ is totally disconnected. 
+
+        \item We cannot know whether $F$ is perfect. Consider the case where we constructed the sequence of rational numbers and values of $\epsilon$ such that one subsequence approached $\sqrt{2}$ from below and another subsequence approached $\sqrt{2}$ from above, and there was no rational number and $\epsilon$ such that $\sqrt{2} \in B_\epsilon(r_n)$. Then we would have that $B_\epsilon(\sqrt{2}) \backslash \{\sqrt{2}\} = \emptyset$, and so $\sqrt{2}$ would be an isolated point of $F$. 
+
+        \smallskip
+
+        We can construct a nonempty, perfect set of irrational numbers by choosing a Cantor set esque construction. Start with $a, b \in \mathbf{R}$, and set $I_0 = [a, b]$. Then, for each $r_n \notin I_0$, choose $\epsilon$ small enough that $B_\epsilon(r_n) \cap I_0 = \emptyset$. For each $r_n \in I_0$, reenumerate them as $\{r_n\}_{n=1}^\infty. $ choose $\epsilon$ such that $B_\epsilon(r_n) \subseteq (a, b)$. Define $I_1 = I_0 \backslash B_{\epsilon_1}(r_1) = [a, c] \cup [d, b]$. Then we continue removing open intervals that do not contain the endpoints, so $I_2 = I_1 \backslash B_{\epsilon_2}(r_2)$ where $B_{\epsilon_2}(r_2)$ is contained within either $(a, c)$ or $(d, b)$, which can be achieved by choosing a sufficiently small $\epsilon_2$. After recursively removing open $\epsilon$-balls contained within $I_n$, leaving only closed intervals, our desired set $I = \bigcap_{n=1}^\infty I_n$
+
+        \smallskip
+
+        Using this construction, the set we defined is closed because it is the complement of a countable union of open sets, and it is perfect because, for any $x$ and for any $\epsilon$, we can find an interval with length less than $\epsilon$, and so the endpoints of that interval will be contained within $B_\epsilon(x)$, and so $B_\epsilon(x) \backslash \{x\} \cap I \neq \emptyset$, so there are no isolated points. Essentially, this set is perfect for the same reason that the Cantor set is perfect.  
+        
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}
