@@ -1,0 +1,222 @@
+\documentclass{hmwk}
+
+\hdr{Problem Set 8}{MATH 1630: Real Analysis}{Aly Rajwani}
+\hwk{8}
+
+\begin{document}
+
+\maketitle
+\begin{problem}{Exercise 30.2}
+    Show that if $X$ has a countable basis $\{B_n\}$ then every basis $\mathcal{C}$ for $X$ contains a countable basis for $X$. [\textit{Hint}: For every pair of indices $n, m$ for which is it possible, choose $C_{n, m} \in \mathcal{C}$ such that $B_n \subset C_{n, m} \subset B_m$.]
+\end{problem}
+
+\begin{solution}
+
+\pre Let $x \in X$ and let $U$ be a neighborhood of $x$. Then, since $\{B_n\}$ is a basis, we can find some $B_n$ such that $x \in B_m \subset U$. Since $\mathcal{C}$ is a basis, and since $B_m$ is an open set containing $x$, we can find a $C_{n, m}$ such that $x \in C_{n, m} \subset B_m \subset U$. Finally, since $\{B_n\}$ is a basis and $C_{n, m}$ is an open set, we can find a $B_n$ such that $x \in B_n \subset C_{n, m} \subset B_m \subset U$. 
+
+\pre By our construction, $\{C_{n, m} : (n, m) \in \N^2\}$ is a basis for $X$, since for each $x \in X$ and neighborhood $U$ of $x$, we can find a $C_{n, m}$ such that $x \in C_{n, m} \subset U$. Since this set is indexed by a subset of $\N^2$, it is countable, and so it is a countable basis. Since $\mathcal{C}$ was arbitrary, every basis $\mathcal{C}$ of $X$ contains a countable basis for $X$.
+\end{solution}
+
+\begin{problem}{Exercise 30.10}
+    Show that if $X$ is a countable product of spaces having countable dense subsets, then $X$ has a countable dense subset. 
+\end{problem}
+
+\begin{solution}
+
+\pre Since $X$ is a countable product of spaces, we express $X$ as $X_1 \times X_2 \times \dots$. Since each of these sets has a countable dense subset, let $D_i$ be a countable dense subset of $X_i$. Define $D := \bigcup_{n\in\N} D_1 \times D_2 \times \dots \times D_N \times \{p_{N+1}\} \times \{p_{N+2}\} \times \dots$, where $p_n$ is a point in $X_n$. Each set in $D$ is countable since each set consists of the finite product $D_1 \times \dots \times D_n$ and the fixed points $\{p_{N+1}\} \times \{p_{N+2}\} \times \dots$, and since $D$ is the countable union of these sets, $D$ is countable. 
+
+\pre To show $D$ is dense, let $U$ be an open set in $X$. In the product topology, any neighborhood $U$ is a set of the form $\Pi_{n\in\N} U_n$ where $U_n \neq X_n$ for finitely many $n$. Let $m$ be the greatest such $n$, and consider the element $D' = D_1 \times \dots \times D_m \times \{p_{m+1}\} \times \dots$ of $D$. Let $x \in U$. Then $x$ is an element of $D'$, since for each $i \leq m$, $D_i$ is a dense subset, so $D_i \cap U_i \neq \emptyset$, and for each $i > m$, $U_i = X_i$ and $X_i \cap \{p_i\} \neq \emptyset$. Thus, $U \cap D' \neq \emptyset$. Since $U$ was an arbitrary open set in $X$ and it has a non-empty intersection with $D$, $D$ is dense in $X$, and since $D$ is countable, $D$ is a countable dense subset of $X$. 
+\end{solution}
+
+\begin{problem}{Exercise 32.6}
+    A space $X$ is said to be \textbf{\textit{completely normal}} if every subspace of $X$ is normal. Show that $X$ is completely normal if and only if for every pair $A, B$ of separated sets in $X$ (that is, sets such that $\bar{A} \cap B = \emptyset$ and $A \cap \bar{B} = \emptyset$), there exist disjoint open sets containing them. [\textit{Hint:} If $X$ is completely normal, consider $X - (\bar{A} \cap \bar{B}).$]
+\end{problem}
+
+\begin{solution}
+    
+    \pre Let $Y$ be a subspace of $X$ and let $A$ and $B$ be disjoint closed sets in $Y$. Then $\bar{A} \cap B A \cap B = \emptyset$ and $A \cap \bar{B} = A \cap B = \emptyset$. Since $A$ and $B$ are separated in $Y$, they are separated in $X$, and by assumption we can find disjoint open sets $U$ and $V$ with $A \subset U$ and $B \subset Y$. Then $A \subset U \cap Y$ and $B \subset V \cap Y$, so we have found disjoint open sets containing $A$ and $B$ respectively, thus $Y$ is normal. Since $Y$ was an arbitrary subspace of $X$, $X$ is completely normal. 
+
+    \pre Let $X$ be completely normal, and let $A$ and $B$ be separated sets in $X$. Consider the subspace $S = X - (\bar{A} \cap \bar{B})$, which is open in $X$. The closure of $A$ in $S$ is $\bar{A} \cap S$, and the closure of $B$ in $S$ is $\bar{B} \cap S$, and these sets are disjoint by definition of $S$. Since $X$ is completely normal, $S$ is normal, and so we can find disjoint open sets $U$ and $V$ such that $\bar{A} \cap S \subset U$ and $\bar{B} \cap S \subset V$. Since $U$ and $V$ are open in $S$, and $S$ is open in $X$, $U$ and $V$ are open in $X$. Now we show that $A \subset U$, and $B$ subset $V$, which will show that every pair of separated sets have disjoint open sets which contain them respectively. If $x \in A \subset \bar{A}$, $x \notin \bar{B}$, since $A$ and $B$ are separated. So, $x \in S$, and $x \in \bar{A} \cap S \subset U$. Similarly, $x \in B$ implies $x \in V$. Thus, $U$ and $V$ are disjoint open sets containing $A$ and $B$, with $A$ and $B$ separated. 
+\end{solution}
+
+\begin{problem}{Exercise 33.1}
+    Examine the proof of the Urysohn lemma, and show that for given $r$,
+    $$f^{-1}(r) = \bigcap_{p > r} U_p - \bigcup_{q < r}U_q$$
+    $p, q$ rational. 
+\end{problem}
+
+\begin{solution}
+
+
+\pre From the proof of Urysohn's Lemma, we have the following statements:
+
+\begin{align}
+    \label{eq1}
+    x \in \bar{U}_r \implies f(x) \leq r \\
+    \label{eq2}
+    x \notin U_r \implies f(x) \geq r
+\end{align}
+
+\pre We will prove this equality is true by proving that both sides are subsets of the other. 
+
+\pre Suppose $x \in f^{-1}(r)$, meaning $r = f(x) = \inf\{p : x \in U_p\}$. Let $p > r$ with $p$ rational. Then $f(x) = r < p$, and by contrapositive of \eqref{eq2}, $x \in U_p$. Thus, $x \in \bigcap_{p > r}U_p$. Let $q < r$ with $q$ rational. Then $f(x) = r > q$, and by contrapositive of \eqref{eq1}, $x \notin \bar{U}_r$, so $x \notin U_r$. Thus, $x \notin \bigcap_{q < r}U_q$. Combining these two expressions, we have that $x \in \bigcap_{p > r}U_p - \bigcup_{q < r}U_q$. 
+
+\pre Suppose $x \in \bigcap_{p > r}U_p - \bigcup_{q < r}U_q$. Then $x \in \bigcup_{p > r}U_p$. This implies that for all rational $p > r$, $x \in U_p \subset \bar{U}_p$, and by \eqref{eq1}, $f(x) \leq p$. As well, $x \notin \bigcup_{q < r}U_q$. This implies that for all rational $q < r$, $x \notin U_q$, and by \eqref{eq2}, $f(x) \geq q$. Combining these two inequalities, we get $q \leq f(x) \leq p$ for all rational $p, q$ satisfying $q < r < p$. 
+
+\pre Suppose that $f(x) > r$. Then by the density of $\Q$, we can find a rational $n$ such that $r < n < f(x)$. But we proved earlier that if $n$ is a rational number greater than $r$, then $f(x) \leq n$. Thus, $f(x)$ cannot be greater than $r$. The proof that $f(x)$ cannot be less than $r$ is similar. Thus, $f(x)$ must equal $r$, and so $x \in f^{-1}(r)$.
+
+\pre Since both of these sets are subsets of each other, they must be equal, and so $f^{-1}(r) = \bigcap_{p > r}U_p - \bigcup_{q < r}U_q$
+\end{solution}
+
+\begin{problem}{Exercise 33.4}
+    Recall that $A$ is a "$G_\delta$ set" in $X$ if $A$ is the intersection of a countable collection of open sets in $X$. 
+
+    \pre \textit{Theorem. Let $X$ be normal. There exists a continuous function $f: X \rarr [0, 1]$ such that $f(x) = 0$ for $x \in A$, and $f(x) > 0$ for $x \notin A$, if and only if $A$ is a closed $G_\delta$ set in $X$}.
+
+    \pre A function satisfying the requirements of this theorem is said to \textbf{\textit{vanish precisely on $A$}}.
+\end{problem}
+
+\begin{solution}
+
+
+\pre Suppose there exists a continuous function $f: X \rarr [0, 1]$ such that $f(x) = 0$ for $x \in A$ and $f(x) > 0$ for $x \notin A$. Then $A$ is closed since $A = f^{-1}(\{0\})$, and for a continuous function, the preimage of a closed set is closed. $A$ is a $G_\delta$ set since $A = f^{-1}(\{0\}) = f^{-1}\left(\bigcap_{n \in \N}\left(-\frac{1}{n}, \frac{1}{n}\right)\right) = \bigcap_{n \in \N}f^{-1}\left(-\frac{1}{n}, \frac{1}{n}\right)$, and so $A$ is the intersection of countably many open sets. 
+
+\pre Suppose $A$ is a closed $G_\delta$ set, so $A = \bigcap_{n \in \N} U_n$ where each $U_n$ is open. Then $X - U_n$ is closed, and so we can apply Urysohn's lemma on $A$ and $X - U_n$ to define a function $f_n(x) = 0$ is $x \in A$ and $f_n(x) = 1$. Define $f: X \rarr [0, 1]$ as $f(x) = \sum_{n\in\N} \frac{1}{2^n}f_n(x)$. If $x \in A$, then each $f_n(x) = 0$, so $f(x) = 0$, and if $x \notin A$, then $x \in X - U_n$ for some $n$, and so $f_n(x) > 0$ for some $n$, so $f(x) > 0$. 
+
+\pre To prove $f$ is continuous, we first note that each $f_n$ is continuous by Urysohn's lemma, and so the sequence $\left(\sum_{k=1}^n \frac{1}{2^k}f_k\right)_{n \in \N}$ is a sequence of continuous functions. This sequence converges uniformly to $f$ by the following:
+\begin{align*}
+    d(f_N(x), f(x)) &= \left|\sum_{n=1}^\infty \frac{1}{2^n}f_n(x) - \sum_{n=1}^N \frac{1}{2^n}f_n(x)\right| \\
+    &= \left|\sum_{n=N+1}^\infty \frac{1}{2^n}f_n(x)\right| \\
+    &\leq \left|\sum_{n=N+1}^\infty \frac{1}{2^n}\right| \\
+    &< \epsilon \text{ for large enough $N$}
+\end{align*}
+where the last statement is true since $\sum_{n=1}^\infty \frac{1}{2^n} \rarr 1$. Since $(f_n)$ is a sequence of continuous functions which uniformly converges to $f$, $f$ is continuous. Thus, if $A$ is a closed $G_\delta$ set, $f: X \rarr [0, 1]$ defined by $f(x) = \sum_{n=1}^\infty \frac{1}{2^n}f_n(x)$ is a continuous function such that $f(x) = 0$ for $x \in A$ and $f(x) > 0$ for $x \notin A$.
+\end{solution}
+
+\begin{problem}{Exercise 35.2}
+In the proof of the Tietze theorem, how essential was the clever decision in Step 1 to divide the interval $[-r, r]$ into three equal pieces? Suppose instead that one divides this interval into three intervals 
+$$I_1 = [-r, -ar], I_2 = [-ar, ar], I_3 = [ar, r],$$
+for some $a$ with $0 < a < 1$. For what values of $a$ other than $a = 1/3$ (if any) does the proof go through? 
+\end{problem}
+
+\begin{solution}
+    
+\pre In the proof we approximate a function $g_0: X \rarr [-ar, ar]$ such that the difference between $f$ and $g_0$ differs by no more than $rm = \max(2ar, (1-a)r) = r\max(2a, 1-a)$, and we define the function $f - g_0: A \rarr [-rm, rm]$. We recursively define $g_n: X \rarr [-ram^{n-1}, ram^{n-1}]$ and $f - \sum_{k=1}^n g_k: A \rarr [-rm^{n-1}, rm^{n-1}]$, and so in order for $g = \sum_{n=1}^\infty g_n$ to be well defined, it must be that $\sum_{n=1}^\infty ram^n$ converges. So, $\sum_{n=1}^\infty ram^n = ra\inftysum \max(2a, 1-a)^n$ converges, which, over the interval $(0, 1)$, is true when $a < 1/2$. 
+
+\pre Note that these values of $a$ are correct since for $a < 1/2$, $rm^n \rarr 0$ as $n \rarr \infty$, and so $g = f$ will still hold. In every other instance, replaces $1/3$ with $a$ does not affect the proof. 
+\end{solution}
+
+\begin{problem}{Topological Groups: Exercise 3}
+    Let $H$ be a subspace of $G$. Show that if $H$ is also a subgroup of $G$, then both $H$ and $\bar{H}$ are topological groups. 
+\end{problem}
+
+\begin{solution}
+
+\pre Since $G$ is a topological group, it satisfies the $T_1$ axiom, it is equipped with a continuous function $p: G \times G \rarr G$ where $p(x, y) = xy$, and a continuous function $i: G \rarr G$ where $i(x) = x^{-1}$.
+
+\pre We will first show that $\bar{H}$ is a subgroup. Since $p$ is continuous, $p(\bar{H} \times \bar{H}) = p(\bar{H \times H}) \subset \bar{p(H \times H)} \subset \bar{H}$. Since $i$ is continuous, $i(\bar{H}) \subset \bar{i(H)} \subset \bar{H}$. 
+
+\pre Since both $H$ and $\bar{H}$ are subgroups of $G$, and $G$ satisfies $T_1$, $H$ and $\bar{H}$ satisfy $T_1$. $p|_H$, $p|_{\bar{H}}$, $i|_H$, and $i|_{\bar{H}}$, all of which are restricted functions of continuous functions, are all continuous functions, and so each of $H$ and $\bar{H}$ are $T_1$, equipped with a function $p$ such that $p(x, y) = xy$, and equipped with a function $i$ such that $i(x) = x^{-1}$. Thus, $H$ and $\bar{H}$ are topological groups. 
+\end{solution}
+
+\begin{problem}{Topological Groups: Exercise 5}
+    Let $H$ be a subgroup of $G$. If $x \in G$, define $xH = \{x \cdot h : h \in H\}$; this set is called a \textbf{\textit{left coset}} of $H$ in $G$. Let $G/H$ denote the collection of left cosets of $H$ in $G$; it is a partition of $G$. Give $G/H$ the quotient topology. 
+    \begin{itemize}
+        \item[(a)] Show that if $\alpha \in G$, the map $f_\alpha$ of the preceding exercise induces a homeomorphism of $G/H$ carrying $xH$ to $(a \cdot x)H$. Conclude that $G/H$ is a homogeneous space.
+        \item[(b)] Show that if $H$ is a closed set in the topology of $G$, then one-point sets are closed in $G/H$. 
+        \item[(c)] Show that the quotient map $p: G \rarr G/H$ is open. 
+        \item[(d)] Show that if $H$ is closed in the topology of $G$ and is a normal subgroup of $G$, then $G/H$ is a topological group
+    \end{itemize}
+\end{problem}
+
+\begin{solution}
+\begin{itemize}
+    \item[(a)] Let $f_\alpha: G \rarr G$ be defined by $f_\alpha(x) = \alpha x$, and $q: G \rarr G/H$ be the quotient map. Then we have the following commutative diagram:
+\catcode`\@=11
+\newdimen\cdsep
+\cdsep=3em
+
+\def\cdstrut{\vrule height .6\cdsep width 0pt depth .4\cdsep}
+\def\@cdstrut{{\advance\cdsep by 2em\cdstrut}}
+
+\def\arrow#1#2{
+  \ifx d#1
+    \llap{$\scriptstyle#2$}\left\downarrow\cdstrut\right.\@cdstrut\fi
+  \ifx u#1
+    \llap{$\scriptstyle#2$}\left\uparrow\cdstrut\right.\@cdstrut\fi
+  \ifx r#1
+    \mathop{\hbox to \cdsep{\rightarrowfill}}\limits^{#2}\fi
+  \ifx l#1
+    \mathop{\hbox to \cdsep{\leftarrowfill}}\limits^{#2}\fi
+}
+\catcode`\@=12
+
+\cdsep=3em
+$$\begin{matrix}
+  G & \arrow{r}{f_\alpha} & G \cr
+  \arrow{d}{q} & & \arrow{d}{q} \cr
+  G/H & \arrow{r}{\widetilde{f}_\alpha} & G/H \cr
+\end{matrix}$$
+
+\pre Let $g: G \rarr G/H$ be defined by $g(x) = (q \circ f_\alpha)(x) = (\alpha x)H$. Then, since $q$ and $f_\alpha$ are both quotient maps, $g$ is the composition of quotient maps, and thus $g$ is a quotient map. Note that for $x \in G$, $g^{-1}(xH) = (\alpha^{-1}x)H$, and so any coset $yH$ can be expressed as $g^{-1}(xH)$ for some $x$. Thus, $G/H = \{g^{-1}(xH) : x \in G\}$. Now, from corollary 22.3 in Munkres, since $g$ is a quotient map, $\widetilde{f}_{\alpha}$ is a homeomorphism. Thus, $f_\alpha$ induces a homeomorphism of $G/H$ carrying $xH$ to $(\alpha x)H$.
+
+\pre A homogeneous space is a space $G$ where for every pair $x, y$ of points of $G$, there exists a homeomorphism of $G$ onto itself that carries $x$ to $y$. $G/H$ is a homogeneous space since for $xH, yH \in G/H$, $\widetilde{f}_{yx^{-1}}(xH) = yx^{-1}xH = yH \in G/H$, so there is a homeomorphism of $G/H$ onto itself that carries $xH$ to $yH$ for all $xH, yH \in G/H$.
+
+\item[(b)] Let $H$ be a closed set in the topology of $G$ and let $\{xH\}$ be a set in $G/H$. $p^{-1}(\{H\}) = H$ is closed in $G$ since $H$ is closed in $G$, so $\{H\}$ is closed in $G/H$. Since $G/H$ is a homogeneous space, we can find a homeomorphism $\widetilde{f}_\alpha$ such that $\widetilde{f}_\alpha(H) = xH$. Then $\widetilde{f}_\alpha(\{H\}) = \{xH\}$. Since $\widetilde{f}_\alpha$ is a homeomorphism and $\{H\}$ is closed in $G/H$, $\{xH\}$ is closed in $G/H$, so one-point sets are closed in $G/H$. 
+
+\item[(c)] Let $U$ be open in $G$. We will show that $p^{-1}p(U) = \bigcup_{h \in H}g_h(U)$, where $g_h: G \rarr G$ is defined by $g_h(x) = xh$.
+
+\pre Let $x \in p^{-1}p(U)$. Then $p(x) \in p(U)$, so $xH \in p(U)$. Thus, there is a $y \in U$ such that $xH = p(y) = yH$. Then $x \in yH$, so $x = yh$ for some $h\in H$, and so $x = g_h(y)$. Thus, $x \in \bigcup_{h \in H}g_h(U)$. 
+
+\pre Let $x \in \bigcup_{h \in H}g_h(U)$. Then $x \in g_h(U)$ for some $h$. Thus, there is a $y \in U$ such that $g_h(y) = yh = x$, so $x \in yH$, which implies $xH = yH = p(y)$, and so $xH \subset p(U)$. Applying $p^{-1}$, we get $x \in p^{-1}p(U)$.
+
+\pre Since $U$ is open in $G$ and $g_h$ is a homeomorphism, $\bigcup_{h \in H}g_h(U)$ is an open set, so $p^{-1}p(U)$ is an open set. Since $p$ is a quotient map, $p(U)$ is open, and thus $p$ is an open map.
+
+\item[(d)] Let the operation on $G/H \times G/H \rarr G/H$ be defined as $xH \times yH \rarr (xy)H$, which is a well-defined operation due to the normality of $H$. Let the identity be $eH = H$ and inverses be defined by $(xH)^{-1} = x^{-1}H$.
+
+\pre Since $H$ is assumed to be closed and by part (b), one point sets are closed in $G/H$, $G/H$ satisfies the $T_1$ axiom.
+
+\pre We now prove that if $f: G \times G \rarr G$ is continuous, then $h: G/H \times G/H \rarr G/H$ defined by $h(xH, yH) = f(x, y)H$ is continuous. We see that clearly $h \circ (p \times p) = p \circ f$, and since $p$ and $f$ are both continuous, $h \circ (p \times p)$ is continuous. By part (c), $p$ is open, so $p \times p: G \times G \rarr G/H \times G/H$ is a quotient map, since it is open and surjective. 
+
+\pre Let $P = \{(xH, yH)\}$, so we have 
+\begin{align*}
+    (p \circ F)((p \times p)^{-1}(P)) &= (h \circ (p \times p))((p \times p)^{-1}(P)) \\
+    &= h(P) \\
+    &= \{h(xH, yH)\}
+\end{align*}
+
+This shows that $p \circ f$ is constant on each set $(p \times p)^{-1}(P)$, and so by theorem 22.2 in Munkres, $p \circ f$ induces $h$ where $h$ is continuous. 
+
+From a previous exercise, we have that $F: G \times G$ defined by $F(x, y) = xy^{-1}$ is continuous, and so $h: G/H \times G/H \rarr G/H$ defined by $h(xH, yH) = F(x, y)H = xy^{-1}H = (xH)(y^{-1}H)$ is continuous, and so $G/H$ is a topological group.
+\end{itemize}
+\end{solution}
+
+\begin{problem}{Topological Groups: Exercise 7}
+    If $A$ and $B$ are subsets of $G$, let $A \cdot B$ denote the set of all points $a \cdot b$ for $a \in A$ and $b \in B$. Let $A^{-1}$ denote the set of all points $a^{-1}$, for $a \in A$. 
+    \begin{itemize}
+        \item[(a)] A neighborhood $V$ of the identity element $e$ is said to be \textbf{\textit{symmetric}} if $V = V^{-1}$. If $U$ is a neighborhood of $e$, show there is a symmetric neighborhood $V$ of $e$ such that $V \cdot V \subset U$. [\textit{Hint:} If $W$ is a neighborhood of $e$, then $W \cdot W^{-1}$ is symmetric.]
+        \item[(b)] Show that $G$ is Hausdorff. In fact, show that if $x \neq y$, there is a neighborhood $V$ of $e$ such that $V \cdot x$ and $V \cdot y$ are disjoint. 
+        \item[(c)] Show that $G$ satisfies the following separation axiom, which is called the \textbf{\textit{regularity axiom}}: Given a closed set $A$ and a point $x$ not in $A$, there exist disjoint open sets containing $A$ and $x$, respectively. [\textit{Hint:} There is a neighborhood $V$ of $e$ such that $V \cdot x$ and $V \cdot A$ are disjoint.]
+        \item[(d)] Let $H$ be a subgroup of $G$ that is closed in the topology of $G$; let $p: G \rarr G/H$ be the quotient map. Show that $G/H$ satisfies the regularity axiom. [\textit{Hint: } Examine the proof of (c) when $A$ is saturated.] 
+    \end{itemize}
+\end{problem}
+
+\begin{solution}
+\begin{itemize}
+    \item[(a)] Since $G$ is a topological group, the map $f: G \times G \rarr G$ defined by $f(x, y) = xy$ is continuous. Since $f(e, e) = e$ and $U$ is a neighborhood of $e$, it follows from the continuity of $f$ that there is a neighborhood $V'$ of $e$ such that $f(V' \times V') = V'\cdot V'\subset U$. Furthermore, the map $g: G \times G \rarr G$ defined by $g(x, y) = xy^{-1}$ is continuous. Since $g(e, e) = e$ and since $V'$ is a neighborhood of $e$, there is a neighborhood $W$ of $e$ such that $g(W \times W) = W \cdot W^{-1} \subset V'$. Let $V = W \cdot W^{-1}$. Then by the hint, $V$ is a symmetric neighborhood of $e$, and $V \cdot V \subset V' \cdot V' \subset U$. 
+
+    \item[(b)] Let $x, y \in G, x \neq y$. Since $G$ is a topological group, it satisfies the $T_1$ axiom, so the one point set $\{xy^{-1}\}$ is closed. Then $U \bs \{xy^{-1}\}$ is open and contains $e$ since $x \neq y$ implies $xy^{-1} \neq e$. By part (a), we can find a neighborhood $V$ of $e$ such that $V \cdot V \subset U$, which is our desired neighborhood. Suppose that $z \in V \cdot x \cap V \cdot y$. Then there are $v_1, v_2 \in V$ such that $z = v_1x = v_2y$. However, this implies $xy^{-1} = v_1^{-1} v_2\subset V^{-1}\cdot V \subset V \cdot V \subset U$, which is a contradiction. Thus, $V \cdot x \cap V \cdot y = \emptyset$. 
+
+    \pre This implies that $G$ is Hausdorff, since for any $x, y \in G, x \neq y$, we can take $V\cdot x$ to be a neighborhood of $x$ and $V \cdot y$ to be a neighborhood of $y$, and we have just shown that these are disjoint. 
+
+    \item[(c)] Let $A$ be a closed set and let $x \notin A$. Then $A \cdot x^{-1}$ is closed, so $G \bs A \cdot x^{-1}$ is open and contains $e$, since $x \notin A$ implies $e \notin A\cdot x^{-1}$. By part (a), we can find a symmetric neighborhood $V$ around $e$ such that $V \cdot V \subset G \bs A \cdot x^{-1}$. Suppose $z \in V \cdot x \cap V \cdot A$. Then there is some $a \in A$ and $v_1, v_2 \in V$ such that $z = v_1x = v_2a$. However, this implies $ax^{-1} = v_2^{-1}v_2 \subset V^{-1}\cdot V = V \cdot V \subset G \bs A \cdot x^{-1}$, which is a contradiction. Thus, $V \cdot x \cap V \cdot A = \emptyset$.
+    
+    \pre $x = e \cdot x \subset V \cdot x$ and $A = e \cdot A \subset V \cdot A$, since $e \in V$, so $V\cdot x$ and $V \cdot A$ contain $x$ and $A$ respectively. $V \cdot x$ is clearly open, and $V \cdot A = \bigcup_{a \in A} V \cdot a$ is open as well. Thus, we have found disjoint open sets containing $A$ and $x$ respectively. 
+
+    \item[(d)] Let $A$ be a closed set in $G/H$ and let $xH \notin A$. Then $p^{-1}(A)$ is closed in $G$ since $p$ is a quotient map and $x \notin p^{-1}(A)$. By part (c), we can find a neighborhood $V$ of $e$ such that $V\cdot x$ and $V \cdot p^{-1}(A)$ are disjoint neighborhoods of $x$ and $p^{-1}(A)$ respectively. So, if $yH \in A$, then $y \in p^{-1}(A)$ and $y \in V \cdot p^{-1}(A)$. This implies $yH \in p(V \cdot p^{-1}(A))$, so $A \subset p(V \cdot p^{-1}(A))$ with $p(V \cdot p^{-1}(A))$ open since $p$ is an open map. Similarly, $xH \in p(V \cdot x)$ with $p(V \cdot x)$ open. 
+
+    \pre Suppose $z \in p(V \cdot p^{-1}(A)) \cap p(V \cdot x)$. Then there exists $a \in p^{-1}(A)$ and $v_1, v_2 \in V$ such that $z = (v_1a)H = (v_2x)H$. This implies that $v_2x = v_1ah$ for some $h \in H$. However, $p(ah) = (ah)H = aH = p(a) \in A$, so $ah \in p^{-1}(A)$. This implies that $v_1ah = v_2x \in (V \cdot p^{-1}(A)) \cap (V \cdot x)$, which is a contradiction. Thus, $p(V \cdot p^{-1}(A))$ and $p(V \cdot x)$ must be disjoint, so $G/H$ satisfies the regularity axiom since $A$ and $xH$ were arbitrary.  
+    
+\end{itemize}
+\end{solution}
+\end{document}

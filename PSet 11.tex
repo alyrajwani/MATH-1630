@@ -1,0 +1,35 @@
+\documentclass{hmwk}
+
+\hdr{Problem Set 11}{MATH 1630: Real Analysis}{Aly Rajwani}
+\hwk{11}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}{Problem 1}
+Let $\L_{\text{iso}}(\R^n; \R^n)$ be the subset of $\L(\R^n; \R^n)$ of \underline{invertible} linear maps $\R^n \rarr \R^n$.
+\begin{itemize}
+    \item[(a)] Let $I: \R^n \rarr \R^n$ be the identity map, and $A \in \L(\R^n ; \R^n)$ any linear map with $\|A\| < 1$. Prove $I + A$ is invertible with $$(I + A)^{-1} = I - A + A^2 - A^3 + \dots$$ 
+    Hint: Show that the right side (call it $T$) is well defined as an element of $\L(\R^n; \R^n)$ and $(I + A)T = I$, $T(I + A) = I$
+    \item[(b)] Deduce from (a) that $\L_{\text{iso}}(\R^n; \R^n)$ is an open subset of $\L(\R^n; \R^n)$. Hint: If $L \in \L_{\text{iso}}(\R^n; \R^n)$ then $L + A = L(I + L^{-1}A)$. 
+    \item[(c)] Consider the map
+    $$\text{inv}: \L_{\text{iso}}(\R^n; \R^n) \rarr \L_{\text{iso}}(\R^n; \R^n)$$ given by inv$(L) = L^{-1}$.
+    Show that inv is differentiable at $I$ and $$d(\text{inv})_I: \L(\L(\R^n; \R^n), \L(\R^n; \R^n))$$ 
+    $$d(\text{inv})_IA = -A$$
+    \item[(d)] Show that at any $L \in \L_{\text{iso}}(\R^n; \R^n)$
+    $$d(\text{inv})_L(A) = -L^{-1}AL^{-1}$$
+    \item[(e)] What is $d^2\text{inv}_L(A, B)$ where $$d^2\text{inv}_L \in \L^2(\L(\R^n;\R^n), \L(\R^n;\R^n); \L(\R^n;\R^n)$$
+    $$\text{bilinear map}$$
+    $d^2\text{inv}_L(A, B) = ??$
+\end{itemize}
+\end{problem}
+
+\begin{solution}
+    
+\end{solution}
+
+\begin{problem}{Problem 2}
+    
+\end{problem}
+\end{document}

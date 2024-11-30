@@ -1,0 +1,225 @@
+\documentclass{hmwk}
+
+\hdr{Problem Set 10}{\textbf{MATH 1630: Real Analysis}}{Aly Rajwani}
+
+\hwk{10}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}{Problem 34}
+Let $I$ be the interval $[-1, 1]$ in $\R$ and $f$ a continuous real-valued function on $I$ such that $f(-1), f(0),$ and $f(1)$ are integers and $f(1) \equiv f(-1) \mod 2$. Then given $\epsilon > 0$, there is a polynomial $P$ with integral coefficients such that $|f(x) - P(x)| < \epsilon$ for all $x \in I$. 
+\end{problem}
+
+\begin{solution}
+
+\pre Let $\varphi = x + x(1 - 2x)(1 - x)$. Then by observation, $0, 1/2$, and $1$ are fixed points. $\varphi$ is a monotone increasing since $\varphi' = 6x^2 - 6x + 2$, which is positive for all $x$. 
+
+\pre Consider $\varphi_n$, the $n^\text{th}$ iterate of $\varphi$. Then since $\varphi$ is monotone increasing and has integral coefficients, $\varphi$ is monotone increasing on $[0, 1]$ and has integral coefficients. Let $\epsilon > 0$ and consider the interval $E = [\epsilon, 1 - \epsilon]$. Let $\phi$ be defined such that $\phi(x) = \lim_{n\rarr\infty}\varphi_n(x)$ on $E$. Since $(\varphi_n)$ is a uniformly bounded sequence on $E$ and is equicontinuous, by the Arzela-Ascoli theorem, $(\varphi_n)$ converges uniformly, and since we defined $\phi$ by the pointwise limits of $(\varphi_n(x))$, it must be that $(\varphi_n) \rarr \phi$. Now we show that $\phi = 1/2$. 
+
+
+    $$\lim_{n\rarr\infty}\varphi_{n+1}(x) = \lim_{n\rarr\infty}\varphi(\varphi_n(x))$$
+     $$\lim_{n\rarr\infty}\varphi_{n+1}(x) = \varphi\left(\lim_{n\rarr\infty}\varphi_n(x)\right)$$
+    $$\phi(x) = \varphi(\phi(x))$$
+
+\pre The second equality is true since $\varphi$ is continuous, and from the third equality, $\phi(x)$ is a fixed point of $\varphi$ on $E$. But since $0, 1 \notin E$, the only fixed point is $1/2$, and so $\phi(x) = 1/2$ on $E$. Thus, for any $\epsilon > 0$, since $(\varphi_n) \rarr \phi = 1/2$ on $E$, there is an $n$ such that $|\varphi_n(x) - 1/2 | < \epsilon$ for $x \in [\epsilon, 1 - \epsilon]$.
+
+\pre Now, given $0 < \alpha < 1$, we wish to construct a polynomial $\psi$ with integral coefficients and no constant term such that $0 \leq \psi(x) \leq 1$ on $[0, 1]$ and $|\psi(x) - \alpha| < \epsilon$ on $[\epsilon, 1 - \epsilon]$.
+
+\pre Since $\Q$ is dense in $\R$, it suffices to construct a $\psi$ for any rational $\alpha \in (0, 1)$. 
+
+\pre Let $\alpha = \frac{1}{2^{k_1}} + \frac{1}{2^{k_2}} + \dots + \frac{1}{2^{k_n}}$ for $k_1 < k_2 < \dots < k_n$ and $k_i \in \N$. Let $g(x) = \varphi_n(x)(1 - \varphi_n(x))$. Since $\varphi_n$ has integral coefficients and no constant terms, so does $g$. For $\epsilon_0 > 0$, choose the $n$ such that $|\varphi_n(x) - 1/2| < \epsilon_0$. Then for $x \in [\epsilon_0, 1 - \epsilon_0]$, we have that $|g(x) - 1/4| < \epsilon_0^2 = \delta
+_2$. In general, for the $m^\text{th}$ iterate of $g$, $|g_m(x) - 1/2^m| < \epsilon_0^m = \delta_m$. 
+
+\pre Let $\psi(x) = g_{k_1}(x) + g_{k_2}(x) + \dots + g_{k_n}(x)$. Since each $g_i$ has integral coefficients and no constant term, $\psi$ does as well, and by construction $0 \leq \psi(x) \leq 1$ on $[0, 1]$. Now consider $|\psi(x) - \alpha|$ on $[\epsilon, 1 - \epsilon]$. By definition, this is equivalent to $\left|\sum_{i=1}^n g_{k_i}(x) - \frac{1}{2^{k_i}}\right|$, and by the triangle inequality, this is less than or equal to $\sum_{i=1}^n \left|g_{k_i}(x) - \frac{1}{2^{k_i}}\right|$. For any $\epsilon > 0$, if we let $\epsilon_0$ be such that $\delta_m < \epsilon/n$, then $|\psi(x) - \alpha| < \epsilon$.
+
+\pre Let $P$ be a polynomial with integral coefficients such that $P(-1) = P(0) = P(1) = 0$, and let $\beta \in \R$. Let $\alpha = \frac{\beta}{\lceil \beta \rceil}$. We will approximate $\alpha$ on the interval $[-1, 1]$, and then multiply by the integer $\lceil \beta \rceil$ to give us $\beta$. 
+
+\pre From what we proved above, we know there is a polynomial $g(x)$ that approximates $\alpha$ within $\epsilon$ on $[\epsilon, 1 - \epsilon]$. Let $\Tilde{g}(x) = g(x^2)$. Then $|\Tilde{g}(x) - \alpha| < \epsilon$ on $[\epsilon - 1, -\epsilon] \cup [\epsilon, 1 - \epsilon]$, and $\Tilde{g}(x)$ has integral coefficients and no constant term. Now for $x \in [-1, 1]$, we have:
+$$|\Tilde{g}(x)P(x) - \alpha P(x)| = |\Tilde{g}(x) - \alpha||P(x)| \leq C|\Tilde{g}(x) - \alpha|$$
+
+\pre where $C = \sup_{x \in [-1, 1]}P(x)$. Because $P$ is continuous, and $P(-1) = P(0) = P(1) = 0$, we know that $C’ = \sup_{x \in [-1, \epsilon - 1] \cup [-\epsilon, \epsilon] \cup [1 - \epsilon, 1]}$ will be very small as $\epsilon$ decreases. Thus, our approximation using $\Tilde{g}$ is sufficient for all $x \in [-1, 1]$. Scaling both $\alpha$ and $\Tilde{g}$ by $\lceil \beta \rceil$, we have now constructed a polynomial with integral coefficients and no constant term that approximates $\beta P$ within $\epsilon$ on $[-1, 1]$. 
+
+\pre We can now reduce the statement of the problem to the Stone-Weierstrass Theorem. 
+
+\pre Let $$\mathcal{P} = \left\{\sum_{i = 1}^n \beta_iP_i + \epsilon \big| \epsilon, \beta_i \in \R, P_i \in \Z[x] \right\}$$ 
+\pre and let $$C = \left\{ f \in C([-1, 1]), 
+\big| f(-1) = f(0) = f(1)\right\}$$
+
+\pre From what we have showed above, we can approximate within $\epsilon$ any function in $\mathcal{P}$ on $[-1, 1]$ by a polynomial with integral coefficients and no constant term. We aim to show that $\bar{\mathcal{P}} = C$.
+
+\pre Let $\Omega = \{-1, 0, 1\}$ and consider the quotient space $[-1, 1]/\Omega$. Since we have a surjective open quotient map $\pi: [-1, 1] \rarr [-1, 1]\bs\Omega$, and $[-1, 1]$ is compact, $[-1, 1]/\Omega$ is compact. This space is Hausdorff because for $a, b \in [-1, 1]\bs\Omega$, is $a, b \notin \{-1, 0, 1\}$, then the fact that $[-1, 1]$ is Hausdorff tells us that we can find disjoint open neighborhoods of $a$ and $b$, if $a \in \{-1, 0, 1\}$, the same argument applies, and if $a, b \in \{-1, 0, 1\}$, then in the quotient space $a$ and $b$ are not distinct points. Thus, $[-1, 1]/\Omega$ is compact Hausdorff. Now we show that $P$ is a subalgebra, contains a non-zero constant function, and separates points. 
+
+\pre Let $p, q \in \mathcal{P}$ and $\alpha \in \R$, so $p = \sum_{i = 1}^n \beta_{pi}P_{pi} + \epsilon_p$ and $q = \sum_{i = 1}^n \beta_{qi}P_{qi} + \epsilon_q$. Then we have closure under addition since
+\begin{align*}
+    p + q &= \left(\sum_{i = 1}^n \beta_{pi}P_{pi} + \epsilon_p\right) + \left(\sum_{i = 1}^n \beta_{qi}P_{qi} + \epsilon_q\right) \\
+    &= \sum_{i = 1}^{n+m}\beta_iP_i + (\epsilon_p + \epsilon_q) \\
+    &\in \mathcal{P}
+\end{align*} 
+
+\pre We also have closure under scalar multiplication since 
+\begin{align*}
+    \alpha p &= \alpha\left(\sum_{i = 1}^n \beta_{pi}P_{pi} + \epsilon_p\right) \\
+    &= \sum_{i = 1}^n \alpha\beta_{pi}P_{pi} + \alpha\epsilon_p \\
+    &\in \mathcal{P}
+\end{align*}
+
+\pre And we have vector multiplication since
+
+\begin{align*}
+    pq &= \left(\sum_{i = 1}^n \beta_{pi}P_{pi} + \epsilon_p\right)\left(\sum_{j = 1}^n \beta_{qj}P_{qj} + \epsilon_q\right) \\
+    &= \sum_{i, j}(\beta_{pi}\beta_{qj})(P_{pi}P_{qj}) + \epsilon_p\sum_{j = 1}^m \beta_{qj}P_{qj} + \epsilon_q\sum_{i = 1}^n\beta{pi}P_{pi} + \epsilon_p\epsilon_q \\
+    &\in \mathcal{P}
+\end{align*}
+
+\pre The first summand is in $\mathcal{P}$ since the product $\Z[x]$ is closed under multiplication, and the second and third summands are in $\mathcal{P}$ by definition. Since we already showed that $\mathcal{P}$ is closed under vector addition, the whole sum is in $\mathcal{P}$ and so $\mathcal{P}$ is closed under vector multiplication. 
+
+\pre Therefore, $\mathcal{P}$ is a subalgebra. 
+
+\pre $1 \in \mathcal{P}$ since we can take $\beta_i = 0$ and $P_{i} = 0$ for all $i$, and then let $\epsilon = 1$. Thus, $\mathcal{P}$ contains a non-zero constant function. 
+
+\pre For any $x, y \in [-1, 1]/\Omega$, we can take $p \in \mathcal{P}$ to be $p(x) = x$. Thus $\mathcal{P}$ separates points. 
+
+\pre Since $\mathcal{P} \in C$ satisfies all these properties, by the Stone-Weierstrass Theorem, $\bar{\mathcal{P}} = C$. 
+
+\pre To use this to solve the given problem, notice that the function $f$ given in the statement of the problem differs from a function $\Tilde{f} \in C$ by only a quadratic polynomial with integral coefficients. Earlier we proved that we can approximate any function in $\mathcal{P}$ by a function in $\Z[x]$, and thus we can approximate $f$ by a function in $\Z[x]$.
+\end{solution}
+
+\begin{problem}{Problem 31}
+Let $\langle f_n \rangle $ be a sequence of continuous functions from a metric space $X$ to a space $Y$ such that for each $x$ in $X$ the sequence $\langle f_n(x) \rangle$ converges to a point $f(x)$ in $Y$. Then $f$ defines a mapping of $X$ into $Y$. Show that there is a set $E$ of first category in $X$ such that $f$ is continuous at each point $x \in X\bs E$. Hence, if $X$ is complete, $f$ is continuous at a dense set of points in $X$. [Hint: Let $F_{n, m} = \{x : \sigma(f_n(x), f_k(x)) < 1/m \text{ for all } k \geq n$\}. Let $F_{n,m}^\circ$ be the interior of $F_{n, m}$. Set $E = \bigcup_{n, m} [F_{n, m}\bs F_{n, m}^\circ]$.]
+\end{problem}
+
+\begin{solution}
+
+\pre Per the hint, we let $F_{n, m} = \{x : \sigma(f_n(x), f_k(x)) \leq 1/m \text{ for all } n \leq k\}$, and so $F_{n, m}\bs F_{n, m}^\circ$ is closed and has an empty interior. Letting $E = \bigcup_{n, m} [F_{n, m}\bs F_{n, m}^\circ]$, we have that $E$ is the countable union of nowhere dense sets, and so it is meager. 
+
+\pre Now we show that $x_0 \notin E$ implies that $f$ is continuous at $x_0$. If $x_0 \notin E$, then for all $n, m$, we have that $x_0 \in F_{n, m}$ implies that $x_0 \in F_{n, m}^\circ$. Let $\epsilon > 0$. We seek to find a $\delta > 0$ such that $\sigma_X(x, x_0) < \delta$ implies that $\sigma_Y(f(x), f(x_0)) < \epsilon$. We note that by the triangle inequality,
+$$\sigma_Y(f(x), f(x_0)) \leq \sigma_Y(f(x), f_n(x)) + \sigma_Y(f_n(x), f_n(x_0)) + \sigma_Y(f_n(x_0), f(x_0))$$
+
+\pre and so we will bound each term on the right by $\epsilon/3$. Since $x_0 \in F_{n, m}^\circ$, which is open, there is an open ball $B_{\sigma_X}(x_0, \delta) \subset F_{n, m}^\circ$ which, for $x \in B_{\sigma_X}(x_0, \delta)$, satisfies  $\sigma_X(x, x_0) < \delta \implies \sigma_Y(f_n(x), f_n(x_0)) < \epsilon/3$. Since $f(x)$ is defined as the limit of the sequence $(f_n(x))$, there is an $N_1$ such that for all $n \geq N_1$, $\sigma_Y(f_n(x), f(x)) < \epsilon/3$. Similarly, there is an $N_2$ such that for all $n \geq N_2$, $\sigma_Y(f_n(x_0), f(x_0)) < \epsilon/3$. Since we have bounded each term by $\epsilon/3$, the sum is bounded by $\epsilon$, and so we have found a $\delta$ such that $\sigma_X(x, x_0) < \delta$ implies $\sigma_Y(f(x), f(x_0)) < \epsilon$, and so $f$ is continuous at $x_0$ when $x \notin E$. Thus, if $X$ is complete, by Baire's Category Theorem, $X\bs E$ is dense, and so $f$ is continuous at a dense set of points in $X$.
+
+\end{solution}
+
+\begin{problem}{Problem 5}
+Let $\Sigma$ be open in $\R^n$, and suppose that $f$ and $g$ are real-valued functions differentiable at $p \in \Sigma$. Show that $fg$ is differentiable at $p$ and that $d(fg)_p = f(p)dg_p + g(p)df_p$.
+\end{problem}
+
+\begin{solution}
+
+\pre To show $fg$ is differentiable at $p$, we will show that there is a linear map $d(fg)_p$ such that $\lim_{h \rarr 0}\frac{(fg)(p + h) - (fg)(p) - d(fg)_p(h)}{|h|} = 0$. Let $d(fg)_p = f(p)dg_p + g(p)df_p$, which is a linear map since it is the sum of linear maps. 
+
+\pre Since $f$ and $g$ are both differentiable, we let $r_f(h) = f(p + h) - f(p) - df_p(h)$ and $r_g(h) = g(p + h) - g(p) - dg_p(h)$, where $\lim_{h \rarr 0}\frac{r_f(h)}{|h|} = 0$ and $\lim_{h \rarr 0}\frac{r_g(h)}{|h|} = 0$. Substituting these expressions, we get that 
+$$(fg)(p+h) - fg(p)$$
+$$=f(p+h)g(p+h) - f(p)g(p)$$
+$$= g(p)[r_f(h) + df_p(h)] + f(p+h)[r_g(h) + dg_p(h)]$$
+$$= g(p)[r_f(h) + df_p(h)] + [r_f(h) + f(p) + df_p(h)][r_g(h) + dg_p(h)]$$
+
+\pre Using this, we can evaluate the limit:
+
+$$\lim_{h \rarr 0}\frac{(fg)(p+h) - (fg)(p) - d(fg)_p}{|h|}$$
+$$= \lim_{h \rarr 0}\frac{g(p)r_f(h) + r_f(h)r_g(h) + r_f(h)dg_p(h) + f(p)r_g(h) + df_p(h)r_g(h) + df_p(h) + dg_p(h)}{|h|}$$
+
+\pre Since $f$ and $g$ are differentiable, each of $f(p), g(p), df_p(h)$, and $dg_p(h)$ is bounded, and since $\lim_{h \rarr 0}\frac{r_f(h)}{|h|} = 0$ and $\lim_{h \rarr 0}\frac{r_g(h)}{|h|} = 0$, this limit of sums is equal to the sum of the limits, and each limit is equal to 0. Thus, we have found a linear map $d(fg)_p$ such that $\lim_{h \rarr 0}\frac{(fg)(p+h) - (fg)(p) - d(fg)_p}{|h|} = 0$, and the unique map satisfying this is $d(fg)_p = f(p)dg_p + g(p)df_p$.
+
+\end{solution}
+
+\begin{problem}{Problem 12}
+Define $f$ on $\R^2$ by $f(0, 0) = 0$, and 
+$$f(s, t) = \frac{st(s^2 - t^2)}{s^2 + t^2}$$
+for $(s, t) \neq (0, 0)$. Show that $f$ is of class $C^1$ in $\R^2$, and that the mixed partial derivatives $D_1D_2f$ and $D_2D_1f$ exist at every point of $\R^2$, but that $D_1D_2f(0, 0) \neq D_2D_1f(0, 0)$.
+\end{problem}
+
+\begin{solution}
+
+\pre First, for every $(s, t) \neq (0, 0)$, $f$ is a rational function with a non-zero denominator, and so it is differentiable for every $(s, t) \neq (0, 0)$. So, we need only show continuity and differentiability at $(0, 0)$.
+
+\pre Since $|s||t| \leq \frac{s^2 + t^2}{2}$, $|f(s, t)| = \left|\frac{st(s^2 - t^2)}{s^2 + t^2}\right| \leq \frac{|s||t|(s^2 + t^2)}{s^2 + t^2} \leq \frac{s^2 + t^2}{2}$, which approaches 0 as $(s, t) \rarr 0$. Thus, $f$ is continuous at $(0, 0)$. 
+
+\pre We compute the partial derivatives directly to show that they exist. $D_1f(0, 0) = \lim_{h \rarr 0}\frac{f(h, 0) - f(0, 0)}{h} = \lim_{h \rarr 0 }\frac{0 - 0}{h} = 0$. And $D_2f(0, 0) = \lim_{h \rarr 0}\frac{f(0, h) - f(0, 0)}{h} = \lim_{h \rarr 0 }\frac{0 - 0}{h} = 0$. Thus, $f$ is of class $C^1$ on $\R^2$. 
+
+\pre Now we show that $D_1D_2f$ and $D_2D_1f$ exist at every point of $\R^2$. For $(s, t) \neq (0, 0)$, $f$ is smooth, and so $D_1D_2f$ and $D_2D_1f$ exist and can be computed explicitly. So, we only need to check $D_1D_2f(0, 0)$ and $D_2D_1f(0, 0)$. 
+
+$$D_1D_2f(0, 0) = \lim_{h \rarr 0}\frac{D_2f(h, 0) - D_2f(0, 0)}{h}$$
+
+\pre so we need to compute $D_2f(h, 0)$.
+\begin{align*}
+    D_2f(h, 0) &= \lim_{t \rarr 0}\frac{f(h, t) - f(h, 0)}{t} \\
+    &= \lim_{t \rarr 0}\frac{\frac{ht(h^2 - t^2)}{h^2+t^2} - 0}{t} \\
+    &= \lim_{h \rarr 0}\frac{h(h^2 - t^2)}{h^2 + t^2} \\
+    &= h
+\end{align*} 
+
+\pre Thus, we have $$D_1D_2f(0, 0) = \lim_{h \rarr 0} \frac{D_2f(h, 0) - D_2f(0, 0)}{h} = \lim_{h \rarr 0 }\frac{h - 0}{h} = 1$$
+
+\pre Now we calculate $D_2D_1f(0, 0) = \lim_{h \rarr 0}\frac{D_1f(0, h) - D_1f(0, 0)}{h}$.
+
+\begin{align*}
+    D_1f(0, h) &= \lim_{s \rarr 0}\frac{f(s, h) - f(0, h)}{s} \\
+    &= \lim_{s \rarr 0}\frac{\frac{sh(s^2 - h^2)}{s^2 + h^2}}{s} \\
+    &= \lim_{s \rarr 0}\frac{h(s^2 - h^2)}{s^2 + h^2} \\
+    &= -h
+\end{align*}
+\pre Thus, we have $$D_2D_1f(0, 0) = \lim_{h \rarr 0}\frac{D_1f(0, h) - D_1f(0, 0)}{h} = \lim_{h \rarr 0}\frac{-h - 0}{h} = -1$$
+
+\pre So, $D_1D_2f$ and $D_2D_1f$ exist everywhere, but $D_1D_1f(0, 0) \neq D_2D_1f(0, 0)$.
+\end{solution}
+
+\begin{problem}{Problem 2-32}
+\begin{itemize}
+    \item[(a)] Let $f: \R \rarr \R$ be defined by 
+    $$f(x) = \begin{cases}
+        x^2\sin\frac{1}{x} & x \neq 0, \\
+        0 & x = 0.
+    \end{cases}$$
+    Show that $f$ is differentiable at $0$ but $f'$ is not continuous at 0.
+    \item[(b)] Let $f: \R^2 \rarr \R$ be defined by 
+    $$f(x, y) = \begin{cases}
+        (x^2 + y^2)\sin\frac{1}{\sqrt{x^2 + y^2}} & (x, y) \neq 0, \\
+        0 & x = 0.
+    \end{cases}$$
+    Show that $f$ is differentiable at $(0, 0)$ but $D_if$ is not continuous at $(0, 0)$.
+\end{itemize}
+\end{problem}
+
+\begin{solution}
+\begin{itemize}
+    \item[(a)] \begin{align*}
+        \lim_{h \rarr 0 }\frac{f(0 + h) - f(0) - 0}{|h|} &= \lim_{h \rarr 0}\frac{f(h) - f(0)}{|h|} \\
+        &= \lim_{h \rarr 0}\frac{h^2 \sin \frac{1}{h}}{|h|} \\
+        &= \lim_{h \rarr 0}|h|\sin\frac{1}{h} \\
+        &= 0
+    \end{align*}
+
+    \pre Thus, the derivative exists at 0, and it is equal to 0. 
+
+    \pre We can check continuity of $f'$ at 0 by checking whether $\lim_{x \rarr 0}f'(x) = f'(0)$. We see that $f'(0) = 0$, but $f'(x) = 2x\sin\frac{1}{x} - \cos\frac{1}{x}$, and so letting $x_n = \frac{1}{2n\pi}$ and $x_m = \frac{1}{(2m+1)\pi}$, we have that $(x_n) \rarr 0$, $(x_m) \rarr 0$, but $\lim_{n \rarr \infty}\cos\frac{1}{x_n} = 1$ and $\lim_{m \rarr \infty}\cos\frac{1}{x_m} = -1$. Thus, $\lim_{x \rarr 0}f'(x) \neq f'(0)$ and so $f'$ is not continuous at 0.
+
+    \item[(b)] \begin{align*}
+        \lim_{(x, y) \rarr 0}\frac{f(x, y) - f(0, 0) - 0}{\sqrt{x^2 + y^2}} &= \lim_{r \rarr 0}\frac{r^2\sin\frac{1}{r}}{r} \\
+        &= \lim_{r \rarr 0}r\sin\frac{1}{r} \\
+        &= 0
+    \end{align*}
+
+    \pre Thus, the derivative exists at $(0, 0)$, and it is equal to $(0, 0$. 
+
+    \pre Now we compute each of the partial derivatives and show they are not continuous at $(0, 0)$.
+
+    \pre $D_xf = 2x\sin\frac{1}{\sqrt{x^2 + y^2}} - x(x^2 + y^2)^{-1/2}\cos\frac{1}{\sqrt{x^2 + y^2}}$
+
+    \pre $D_yf = 2y\sin\frac{1}{\sqrt{x^2 + y^2}} - y(x^2 + y^2)^{-1/2}\cos\frac{1}{\sqrt{x^2 + y^2}}$
+
+    \pre Since both of these terms have a $\cos\frac{1}{r}$ component, they are not continuous at $(0, 0)$.
+\end{itemize}
+\end{solution}
+
+
+\begin{problem}{Problem 9}
+A function $f: \R^n\bs\{0\} \rarr \R$ is called \textit{homogeneous of degree $k$} is $f(tx) = t^kf(x)$ for every $x \in \R^n, x \neq 0$, and every $t \in \R, t > 0$. Show that if $f$ is homogeneous of degree $k$ and differentiable, then $\sum_{j = 1}^n x^jD_jf(x) = kf(x)$.
+\end{problem}
+
+\begin{solution}
+
+\pre If $f$ is homogeneous of degree $k$, then $f(tx) = t^kf(x)$. Differentiating both sides with respect to $t$, we get $\sum_{j=1}^n x^jD_jf(tx) = kt^{k-1}f(x)$. Since this is true for all $t > 0$, it is true for $t = 1$, and so we have $\sum_{j=1}^n x^jD_jf(x) = kf(x)$.
+\end{solution}
+\end{document}

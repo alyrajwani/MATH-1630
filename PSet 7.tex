@@ -8,23 +8,42 @@
 
 \begin{problem}{Exercise 26.2}
     \begin{itemize}
-        \item[(a)] Show that in the finite complement topology on $\R$, every subspace is compact
+        \item[(a)] Show that in the finite complement topology on $\R$, every subspace is compact.
         \item[(b)] If $\R$ has the topology consisting of all sets $A$ such that $\R - A$ is either countable or all of $\R$, is $[0, 1]$ a compact subspace?
     \end{itemize}
 \end{problem}
 
 \begin{solution}
+\begin{itemize}
+        \item[(a)] Let $X$ be an arbitrary subspace of $\R$, and let $\A$ be an open cover of $X$. Let $A_0 \in \A,$ so $\R\bs A_0$ is finite, meaning $X\bs A_0$ is finite. Enumerate the elements of $X\bs A$ as $\{x_1, x_2, \dots, x_n\}$, and let $\{A_1, A_2, \dots, A_n\}$ be a subset of $\A$ satisfying $x_i \in A_i$ for all $i$. Such a set exists because $\A$ is a cover of $X$. Then, $\bigcup_{i=0}^n A_n = X$ is a finite subcover of $X$. 
 
+        \item[(b)] For $n \in \Z$, let $B_n = \{1/k : k \geq n\}$, and let $A_n = [0, 1]\bs B_n$. Then $A_n$ is open in $[0, 1]$ since $A_n^c = B_n$, and by definition $B_n$ is countable. $\A = \{A_n : n \in \Z\}$ is an open cover of $[0, 1]$. Consider a finite subset of $\A$ so we could take some $A_N$ in the finite subcover with $N$ maximal. Since $A_n \subset A_{n+1}$, and $1/N \notin A_N$, there is no element of the finite subset containing $1/N$. Thus, no finite subset can be a cover of $[0, 1]$, so $[0, 1]$ is not compact. 
+    \end{itemize}
 \end{solution}
 
 \begin{problem}{Exercise 26.4}
 
-    \ss
-    \noindent Show that every compact subspace of a metric space is bounded in that metric and is closed. Find a metric space in which not every closed bounded subspace is compact.
+    \pre Show that every compact subspace of a metric space is bounded in that metric and is closed. Find a metric space in which not every closed bounded subspace is compact.
 \end{problem}
 
 \begin{solution}
-    
+
+\pre Let $Y$ be a compact subspace of a metric space $X$ with metric $d$. Since $X$ is a metric space, $X$ is Hausdorff. Every compact subspace of a Hausdorff space is closed by Theorem 26.3 in Munkres, so $Y$ is closed. 
+
+\pre Let $y_0 \in Y$, and consider $\B = \{B_d(y_0, n)\}_{n=1}^\infty$, the metric balls around $y_0$ with radius $n \in \N$. Then $\B$ is an open cover of $Y$, since for any $y \in Y$, we can find a $k$ large enough that $d(y_0, y) < k$, meaning $y \in B_d(y_0, k)$. Since $Y$ is compact, there is a finite subcover of $\B$, denoted $\{B_{d}(y_0, n_1), B_{d}(y_0, n_2), \dots, B_{d}(y_0, n_k)\}$. Then $Y \subset B_{d}(y_0, n_k)$, and since $n_k$ is finite, $Y$ is bounded in the metric.
+
+\pre Let $X$ be an infinite topological space with the discrete topology and the following metric:
+
+$$d(x, y) = \begin{cases}
+    1 \text{ if } x \neq y \\
+    0 \text{ if } x = y
+\end{cases}
+$$
+
+\pre This satisfies $d(x, x) = 0$, $d(x, y) > 0$ for $x \neq y$, $d(x, y) = d(y, x)$, and $d(x, z) \leq d(x, y) + d(y, z)$, so it is indeed a metric. 
+
+\pre Then $X$ is closed, and since the distance between any two points is at most 1, $X \subset B_d(x, 2)$ for any $x \in X$. Thus, $X$ is closed and bounded, however, the open cover consisting of all singleton sets clearly has no finite subcover, so $X$ is not compact.
+
 \end{solution}
 
 \begin{problem}{Exercise 26.7}
@@ -34,7 +53,10 @@
 \end{problem}
 
 \begin{solution}
-    
+
+\pre Let $C$ be closed in $X \times Y$. We want to show that $X - \pi_1(C)$ is open in $X$. Let $x_0 \in X - \pi_1(C)$, so $x_0 \times Y \subset (X \times Y) - C$. Define $N = C^c$, so $N$ is open in $X \times Y$. Since $Y$ is compact, we apply the tube lemma to find some tube $W \times Y$ about $x_0 \times Y$ where $W$ is a neighborhood of $x_0$ in $X$. 
+
+\pre If $x \in W$, then $x \times y \in W \times Y \subset N$ for all $y \in Y$, so $x \times y \notin C$ for all $y \in Y$. Thus, $x \notin \pi_1(C)$. So $W \subset X - \pi_1(C)$, meaning $X - \pi_1(C)$ is open, and so $\pi_1(C)$ is closed. Since $C$ was an arbitrary closed set, and the projection $\pi_1(C)$ is closed, $\pi_1: X \times Y \rarr X$ is a closed map if $Y$ is compact.
 \end{solution}
 
 \begin{problem}{Exercise 27.2}
@@ -43,14 +65,34 @@
     \begin{itemize}
         \item[(a)] Show that $d(x, A) = 0$ if and only if $x \in \bar{A}$.
         \item[(b)] Show that if $A$ is compact, $d(x, A) = d(x, a)$ for some $a \in A$. 
-        \item[(c)] Define the $\epsilon-$neighborhood of $A$ in $X$ to be the set $$U(A, \epsilon) = \{x | d(x, A) < \epsilon\}.$$ Show that $U(A, \epsilon)$ equals the union of open ball $B_d(a, \epsilon)$ for $a \in A$. 
+        \item[(c)] Define the $\epsilon-$neighborhood of $A$ in $X$ to be the set $$U(A, \epsilon) = \{x : d(x, A) < \epsilon\}.$$ Show that $U(A, \epsilon)$ equals the union of open balls $B_d(a, \epsilon)$ for $a \in A$. 
         \item[(d)] Assume that $A$ is compact; let $U$ be an open set containing $A$. Show that some $\epsilon-$neighborhood of $A$ is contained in $U$.
         \item[(e)] Show that the result in (d) need not hold if $A$ is closed but not compact. 
     \end{itemize}
 \end{problem}
 
 \begin{solution}
+\begin{itemize}
+    \item[(a)] Suppose $d(x, A) = \epsilon > 0$. Then $B_d(x, \epsilon) \cap A = \emptyset$, so $x \notin \bar{A}$. Thus, $x \in \bar{A} \implies d(x, A) = 0$
+
+    \pre Suppose $x \notin \bar{A}$. Then $\exists \epsilon > 0$ such that $B_d(x, 2\epsilon) \cap A = \emptyset$, so $d(x, A) > \epsilon > 0$. Thus, $d(x, A) = 0 \implies x \in \bar{A}$.
+
+    \pre Thus, $x \in \bar{A} \iff d(x, A) = 0$.
     
+    \item[(b)] Let $d: A \times A \rarr \R$ be the distance function. Since $d$ is continuous, $d_x: A \rarr \R$ defined by $d(x, a)$ for $a \in A$ is continuous. Since $d_x$ is continuous, $A$ is compact, and $\R$ is an ordered set, we can apply the extreme value theorem to find an $a_0 \in A$ such that $d_x(a_0) \leq d_x(a)$ for all $a \in A$. For such an $a_0, d(x, a_0) = d(x, A)$.
+    
+    \item[(c)] Suppose $x \in U(A, \epsilon)$. Then $d(x, A) < \epsilon$, so there is some $a_0 \in A$ such that $d(x, a_0) < \epsilon$, and so $x \in B_d(a_0, \epsilon) \subset \bigcup_{a \in A}B_d(a, \epsilon)$. 
+
+    \pre Suppose $x \in \bigcup_{a \in A}B_d(a, \epsilon)$, so $x \in B_d(a_0, \epsilon)$ for some $a_0 \in A$. Then $d(x, A) \leq d(x, a_0) < \epsilon$, so $x \in U(A, \epsilon)$.
+
+    \pre Thus, $\bigcup_{a \in A}B_d(a, \epsilon) = U(A, \epsilon)$.
+    
+    \item[(d)] Since $U$ is open, any $a \in A \subset U$ has an $\epsilon_a$ such that $B_d(a, \epsilon_a) \subset U$. Thus, $\{B_d(a, \epsilon_a)\}$ is an open cover of $A$ contained in $U$. Since $A$ is compact, there is a finite subcover $\{B_d(a_1, \epsilon_{a_1}), B_d(a_2, \epsilon_{a_2}), \dots, B_d(a_n, \epsilon_{a_n})\}$. Let $\delta$ be the Lebesgue number for this covering, and let $\epsilon = \delta/2$. Then for $x \in A$, $B_d(x, \epsilon) \subset B_d(a_i, \epsilon_{a_i})$ for some $1 \leq i \leq n$. 
+
+    \pre From the previous problem, we have that $U(A, \epsilon) = \bigcup_{a \in A}B_d(a, \epsilon)$, and so $\bigcup_{a \in A}B_d(a, \epsilon) = U(A, \epsilon) \subset \bigcup_{i = 1}^n B_d(a_i, \epsilon_{a_i}) \subset U$, so we have found an $\epsilon-$neighborhood of $A$ contained in $U$.
+    
+    \item[(e)] Consider the metric space $\R^2$ and the set $A = \{x \times \tan x : -\frac{\pi}{2} < x < \frac{\pi}{2}\}$. Then $A$ is closed but not compact since it is not bounded. Let $U = (-\frac{\pi}{2}, \frac{\pi}{2}) \times \R$. Then for any $\epsilon > 0$, there is an $a \in A$ such that $B_d(a, \epsilon) \cap \R^2 - U \neq \emptyset$, so no $\epsilon-$neighborhood of $A$ is contained in $U$. 
+\end{itemize}
 \end{solution}
 
 \begin{problem}{Exercise 28.7}
@@ -66,20 +108,86 @@
 \end{problem}
 
 \begin{solution}
+\begin{itemize}
+    \item[(a)] Since (b) is a generalization of (a), we only prove (b).
+    \item[(b)] Let $f^1 = f$ and $f^{n+1} = f \circ f^n$. Let $A_n = f^n(X)$ and $A = \bigcap A_n$. We will show that $f(A) = A$.
+
+    \pre First, since $X$ is compact, $f^n(X) = A_n$ is compact and thus closed. As well, since $A_{n+1} \subset A_n$, $A$ is closed and non-empty. 
+
+    \pre Let $y \in f(A)$, so there is an $x \in A$ such that $f(x) = y$. Since $x \in A$, $x \in A_n$ for all $n$. If $n=1$, then $y \in A_1 = f(X)$ since $x \in X$. If $n > 1$, then $x \in A_n \subset A_{n-1}$, so $y \in f(A_{n-1}) = f^n(X) = A_n$. So, $y \in A_n$ for all $n$, meaning $y \in A$. Thus, $f(A) \subset A$. 
+
+    \pre Let $x \in A$, and choose $x_n$ so that $x = f^{n+1}(x_n)$. Consider the sequence $y_n = f^n(x_n)$. Since $X$ is a compact metric space, it is sequentially compact, and so $\{y_n\}$ has a convergent subsequence $z_n$ with a limit $a \in X$. Since $x \in A, f(z_n) = f^{n+1}(x_n) = x \in A$, and so $a \in \bar{A}$. Since $A$ is closed, $a \in A$. $f(z_n) = x$ for all $n$, so $f(a) = x$, meaning $x \in f(A)$. Thus, $A \subset f(A).$
+
+    \pre We now have that $A = f(A)$. We now show that $A$ has exactly one point, which is a fixed point of $f$. Suppose $A$ has two distinct points. Then since the distance function $d: A \times A \rarr \R$ is continuous, we apply to extreme value theorem to find $x, y \in A$ such that $d(x', y') \leq d(x, y)$ for all $x', y' \in A$. Letting $x = f(a)$ and $y = f(b)$ for $a, b \in A$, we get $d(x, y) = d(f(a), f(b)) < d(a, b) \leq d(x, y)$, which is a contradiction. Thus, $A$ has only one point, which is a fixed point of $f$.
+
+    \pre Lastly to show that the fixed point of $f$ is unique, we suppose there are multiple fixed points $x$ and $y$. Then $d(x, y) = d(f(x), f(y)) < d(x, y)$.
+
+    \item[(c)] First, we show $f$ maps from $X$ to $X$. The derivative $f'$ of $f$ is $1 - x$, so $f$ is increasing over its domain. Since $f(0) = 0$ and $f(1) = 1/2$, $f$ maps from $X$ to $X$. 
+
+    \pre Now consider the following:
     
+    \begin{align*}
+        d(f(x), f(y)) &= |x - \frac{x^2}{2} - y + \frac{y^2}{2}| \\
+        &= |(x - y) - \frac{1}{2}(x^2 - y^2)| \\
+        &= |x-y||1 - \frac{1}{2}(x + y)| \\
+        &= d(x, y)|1 - \frac{1}{2}(x + y)| \\
+        &< d(x, y)
+    \end{align*}
+
+    where the last inequality is true since $|1 - \frac{1}{2}(x + y)$ for $x, y \in [0, 1]$. Thus, $f$ is a shrinking map.
+
+    \pre Now we show $f$ is not a contraction. Suppose $f$ was a contraction, so there was an $\alpha \in (0, 1)$ such that $d(f(x), f(y)) < \alpha d(x, y)$ for all $x, y \in X$. Then $d(f(x), f(0)) = x|1 - \frac{1}{2}x|$ for all $x$. We can take $x > 0$ small enough such that $1 - \frac{1}{2}x > \alpha$, and then the condition for being a contraction is not met. 
+
+    \item[(d)] Clearly $f$ is a map from $\R$ to $\R$. First, we show that it is a shrinking map. 
+
+    \begin{align*}
+        d(f(x), f(y)) &= \left|\frac{[x + (x^2 + 1)^{1/2}]}{2} - \frac{[y + (y^2 + 1)^{1/2}]}{2}\right| \\
+        &= \frac{|x - y|}{2}\left|1 + \frac{[x + (x^2 + 1)^{1/2}] - [y + (y^2 + 1)^{1/2}]}{x-y}\right| \\
+        &= \frac{|x - y|}{2}\left|1 + \frac{x+y}{[x + (x^2 + 1)^{1/2}] + [y + (y^2 + 1)^{1/2}]}\right| \\
+        &< \frac{|x - y|}{2} + \frac{|x - y|}{2}\left|\frac{1}{2} + \frac{1}{2}\right| \\
+        &= |x-y|
+    \end{align*}
+
+    Now, we show that it is not a contraction. Suppose there is an $\alpha \in (0, 1)$ such that $d(f(x), f(y)) < \alpha d(x, y)$ for all $x, y \in X$. Then $d(f(x), f(0)) = d(f(x), 1/2) < \alpha d(x, 0)$. We have the following:
+
+    \begin{align*}
+        d(f(x), f(0)) &= \frac{|x|}{2}\left|1 + \frac{x}{(x^2 + 1)^{1/2}}\right| \\
+        &= \frac{x}{2}\left|1 + \frac{1}{(1 + \frac{1}{x^2})^{1/2}}\right|
+    \end{align*}
+
+    So, if $x$ satisfies $\frac{1}{2}\left|1 + \frac{1}{(1 + \frac{1}{x^2})^{1/2}}\right| > \alpha$, then $f$ is not a contraction. We can find an $x$ which satisfies this since $\lim_{x \rarr \infty} \frac{1}{2}\left|1 + \frac{1}{(1 + \frac{1}{x^2})^{1/2}}\right| = 1$. Thus, $f$ is not a contraction. 
+
+    \pre Now we show $f$ has no fixed points. $f(x) = \frac{[x + (x^2 + 1)^{1/2}]}{2} > \frac{x + |x|}{2} > x$ for all $x$, so $f(x) \neq x$.
+\end{itemize}    
 \end{solution}
 
 \begin{problem}{Exercise S1}
     \begin{itemize}
         \item[(a)] It follows from the Tychonoff Theorem that the countable product $[0, 1]^\N$ is compact in the product topology. Prove this directly by verifying sequential compactness. 
-        \item[(b)] Now consider $X = [0, 1] \times [0, 1] \times \dots $ with the uniform $(\ell^\infty)$ metric. $$d(x, y) = \sup_{m \geq 1}|x_m - y_m|$$. Show that $X$ is not compact, and in fact no closed ball is either (a closed ball is $\{x \in X : d(x, x_0) \leq r\}$ for some $x_0 \in X$ and $r > 0$)
+        \item[(b)] Now consider $X = [0, 1] \times [0, 1] \times \dots $ with the uniform $(\ell^\infty)$ metric. $$d(x, y) = \sup_{m \geq 1}|x_m - y_m|$$ Show that $X$ is not compact, and in fact no closed ball is either (a closed ball is $\{x \in X : d(x, x_0) \leq r\}$ for some $x_0 \in X$ and $r > 0$)
         \item[(c)] Conclude $X$ in (b) is not locally compact. 
         \item[(d)] Show that the countable product $[0, 1] \times [0, \frac{1}{2}] \times [0, \frac{1}{3}] \times \dots $ with the uniform ($\ell^\infty$) metric is compact. Thus, there are "infinite dimensional" compact subsets. 
     \end{itemize}
 \end{problem}
 
 \begin{solution}
-    
+\begin{itemize}
+    \item[(a)] To show that $[0, 1]^\N$ is sequentially compact, we will show that every sequence of points in $[0, 1]^\N$ has a convergent subsequence. 
+
+    Let $(x_n)_{n=1}^\infty$ be a sequence in $[0, 1]^\N$. Each $x_n$ is itself a sequence $(x_{nm})_{m=1}^\infty$. If we fix $m = 1$ and consider the sequence $(x_{n1})_{n=1}^\infty$, we have a sequence in $[0, 1]$, so by Bolzano-Weierstrass, there is a convergent subsequence $(x_{n(1, k)1})_{k=1}^\infty$. We then fix $m = 2$, and consider the convergent subsequence we just found, this time considering the second component. Since $(x_{n(1, k)2})_{k=1}^\infty$ is bounded, we can find a convergent subsequence $(x_{n(2, k)2})_{k=1}^\infty$. We continue this process for each $m$ and choose our subsequence to be $(x_{n(k, k)}) = (x_{n(k, k)m})_{m=1}^\infty$. By construction, for each $m$, $(x_{n(k, k)m})_{k=1}^\infty$ converges, and so we have found a subsequence of the original sequence that converges. Thus, $[0, 1]^\N$ is sequentially compact, and since it a metrizable space, $[0, 1]^\N$ is compact. 
+
+    \item[(b)] Consider the sequence $(x_n)$ where $x_{nm} = 1$ if $n=m$ and $0$ otherwise. Then, for any $n \neq m$, $d(x_n, x_m) = 1$, and so $(x_n)$ has no Cauchy subsequence, and therefore no convergent subsequence. $X$ is therefore not sequentially compact, since we found a sequence that has no convergent subsequence. 
+
+    \pre Consider some closed ball $B = \{x \in X : d(x, x_0) \leq r\}$ with $r > 0$. Without loss of generality, let $x_0 = 0$. Then $x \in B$ implies $\sup_{m \geq 1} |x_m| \leq r$, so each coordinate of $x$ is bounded by $r$. Thus, $x \in [0, r]^\N$, and so $B \subset [0, r]^\N$. However, we can use the same argument are before, considering the sequence $(x_n)$ defined by $x_{nm} = r$ if $n = m$ and $0$ otherwise. Then since $r > 0$, when $n \neq m$, $d(x_n, x_m) = r > 0$, and so $(x_n)$ contains no Cauchy subsequence and therefore no convergent subsequence. Thus, no closed ball is compact, since no closed ball is sequentially compact. 
+
+    \item[(c)] To be locally compact, it must be the case that for any $x \in X$, we can find a neighborhood $\U$ and a compact space $K$ such that $x \in \U \subset K$, but since no closed ball is compact, we cannot find such a $K$.
+
+    \item[(d)] To show the given countable product is compact, we show that any sequence has a convergent subsequence. 
+
+    Let $(x_n)$ be a sequence in $[0, 1] \times [0, \frac{1}{2}] \times \dots$. Then each $x_n$ is itself a sequence $(x_{nm})_{m=1}^\infty$, where $x_{nm} \in [0, \frac{1}{m}]$. For a fixed $m$, $(x_{nm})_{n=1}^\infty$ is bounded by $\frac{1}{m}$. Choose a subsequence of $(x_n)$ in the same way that we did in part (a), so that the subsequence is given by $(x_{n(k, k)})$. 
+
+    We now show that this sequence is convergent in the uniform metric. Define $x$ to be the point such that $x_m$ is the number that $(x_{nm})_{n=1}^\infty$ converges to. For any $\epsilon > 0$, we can choose an $N$ such that $d(x, x_n) = \sup_{m \geq 1} |x_{nm} - x_m| < \epsilon$, since each component converges to $x_m$ individually. Thus, $(x_n)$ converges to $x$, and since $(x_n)$ was an arbitrary sequence, $[0, 1] \times [0, \frac{1}{2}] \times \dots $ is sequentially compact, and therefore compact. 
+\end{itemize}
 \end{solution}
 
 \begin{problem}{Exercise 29.3}
@@ -89,13 +197,21 @@
 \end{problem}
 
 \begin{solution}
-    
+
+\pre The discrete topology on $X$ is locally compact, since for any $x \in X$, $x \in \{x\}$ with $\{x\}$ compact and open, so we have found a neighborhood $\U$ of $x$ and a compact subspace $K$ such that $x \in \U \subset K$. 
+
+\pre Let $\Q_d$ be the set of rational numbers using the discrete topology. Consider the identity function $i: \Q_d \rarr \Q$, which we know to be continuous. Then $i(\Q_d) = \Q$, $\Q_d$ is locally compact, but $\Q$ is not locally compact. 
+
+\pre If $f$ is both continuous and open, and $X$ is a locally compact space, then $f(X)$ is locally compact. Let $y \in f(X)$, so $y = f(x)$ for some $x \in X$. Since $X$ is locally compact, there exists a neighborhood $\U$ of $x$ and a compact subspace $K$ such that $x \in \U \subset K$. Since $f$ is a continuous open map, $f(\U)$ is open, and $f(K)$ is compact. Thus, $y = f(x) \in f(\U) \subset f(K)$, so for each $y \in f(X)$ we have found a neighborhood of $y$ that is contained in a compact subspace, so $f(X)$ is locally compact. 
 \end{solution}
 
 \begin{problem}{Exercise 29.6}
 
-    \ss
-    \noindent
-    Show that the one-point compactification of $\R$ is homeomorphic with the circle $S^1$.
+    \pre Show that the one-point compactification of $\R$ is homeomorphic with the circle $S^1$.
 \end{problem}
+
+\begin{solution}
+
+    \pre Consider $f: \R \rarr S^1\bs \{N\}$, where $N = (0, 1)$, defined by $f(x) = \left(\frac{2x}{x^2 + 1}, \frac{x^2 - 1}{x^2 + 1}\right)$. Geometrically, if a line is drawn from $N$ to $x$, $f(x)$ is the intersection of this line with $S^1$. $f$ is a homeomorphism, as shown in class. Let $g: \R \cup \{\infty\} \rarr S^1$ defined by $g(\infty) = N$ and $g(x) = f(x)$ for all other $x$. To show that adding the extra point maintains the continuity of $g$, we see that a neighborhood around $N$ in $S^1$ has a preimage of $(-\infty, a) \cup (b, \infty)$, which is open in $\R \cup \{\infty\}$, and a neighborhood of $\infty$ maps to $(g(a), g(b))$ which contains $N$, and such a neighborhood is open in $S^1$. Thus, since $f$ is a homeomorphism and adding the point at infinity maintains bijectivity and continuity, $g$ is a homeomorphism, so the one point compactification of $\R$ is homeomorphic to $S^1$. 
+\end{solution}
 \end{document}

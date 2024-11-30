@@ -1,0 +1,308 @@
+\documentclass{hmwk}
+
+\hdr{Problem Set 9}{\textbf{MATH 1630: Real Analysis}}{Aly Rajwani}
+\hwk{9}
+
+\begin{document}
+
+\maketitle
+
+\begin{problem}{Problem 1}
+\begin{itemize}
+    \item[(a)] Prove $U(n), SU(n), O(n), SO(n)$ are compact, $SL(n, \R)$ is not. 
+    \item[(b)] Prove $GL(n, \C)$ is path connected but $O(n)$ is not connected
+\end{itemize}
+\end{problem}
+
+\begin{solution}
+\begin{itemize}
+    \item[(a)] $U(n)$:
+
+    The function $f$ defined by $f(A) \mapsto A^*A$ is continuous, and $U(n) = f^{-1}(\{I\})$. Since $\{I\}$ is a closed set, $U(n)$ is closed. For any $A \in U(n)$, $\|A\| = \sup_{\|x\| = 1}\|Ax\| = \sup_{\|x\| = 1} \|x\| = 1$, since for a unitary matrix, $\|Ax\| = \|x\|$. Thus, $U(n)$ is closed and bounded, and since it is a finite dimensional normed vector space, by the Heine-Borel theorem, it is compact. 
+
+    \pre $SU(n)$:
+
+    The determinant function is continuous, and $SU(n) = \det^{-1})\{1\})$. Since $\{1\}$ is a closed set, $SU(n)$ is closed. Since $SU(n) \subset U(n)$ and $U(n)$ was just proved to be compact, by Theorem 26.2 in Munkres, $SU(n)$ is compact. 
+
+    \pre $O(n)$:
+
+    The function $f$ defined by $f(A) \mapsto A^TA$ is continuous, and $O(n) = f^{-1}(\{I\})$. Since $\{I\}$ is a closed set, $O(n)$ is closed. For any $A \in O(n)$, $\|A\| = \sup_{\|x\| = 1}\|Ax\| = \sup_{\|x\| = 1} \|x\| = 1$, since for an orthogonal matrix, $\|Ax\| = \|x\|$. Thus, $O(n)$ is closed and bounded, and since it is a finite dimensional normed vector space, by the Heine-Borel theorem, it is compact. 
+
+    \pre $SO(n)$:
+
+    The determinant function is continuous, and $SO(n) = \det^{-1})\{1\})$. Since $\{1\}$ is a closed set, $SO(n)$ is closed. Since $SO(n) \subset O(n)$ and $O(n)$ was just proved to be compact, by Theorem 26.2 in Munkres, $SO(n)$ is compact. 
+
+    \pre $SL(n, \R)$:
+
+    Since $SL(n, \R)$ is a finite dimensional normed vector space, compactness is equivalent to closed and boundedness, so we will show that $SL(n, \R)$ is not bounded. 
+
+    Suppose $M$ is a bound, so for any $A \in SL(n, \R)$, $\sup_{\|x\| = 1}\|Ax\| < M$. Let $A$ be a matrix with $M + 1$ in the top left, $1/(M+1)$ in the bottom left, 1s across the rest of the main diagonal, and 0s everywhere else. Let $v$ be the vector with 1 as the first component and 0s everywhere else. Then $\det A = 1$, so $A \in SL(n, \R)$, but  $\|Av\| = M + 1$, so $M$ is not a bound for $SL(n, \R)$. Thus, $SL(n, \R)$ is unbounded, so it is not compact.
+
+    \item[(b)] To prove $GL(n, \C)$ is path-connected, we construct a path $f: [0, 1] \rarr GL(n, \C)$ between $A, B \in GL(n, \C)$ such that $f(0) = A, f(1) = B$, and $f$ is continuous. 
+
+    Let $f(t) = z(1 - t)A + tB$. Then $f(0) = A$ and $f(1) = B$. $f$ is clearly continuous since it is the addition of matrices. We specifically choose $z$ such that this path does not intersect any eigenvalues of $tB$, which is possible since there are only finitely many of them. With this choice of $z$, $f(t) \in GL(n, \C)$ for all $t \in [0, 1]$. 
+
+    To prove $O(n)$ is not connected, we will find a separation of $O(n)$. 
+
+    For any $A \in O(n)$, $A^{-1} = A^T$, so $I = A^TA$. Taking the determinant, we get $1 = \det(A^TA) = \det(A)\det(A) = \det(A)^2$. Thus, $\det(A) = \pm 1$. We thus let $C = \{A \in O(n) : \det A = 1\}$ and we let $D = \{A \in O(n) : \det A = -1\}$. Then $C$ and $D$ are disjoint open sets whose union is $O(n)$, so they are a separation, and $O(n)$ is not connected. 
+\end{itemize}
+\end{solution}
+
+\begin{problem}{Problem 2}
+Let $X, Y$ be Banach spaces. Prove that if $T: X \rarr Y$ is linear, then $T$ is continuous if and only if $\exists C > 0$ such that $\forall x \in X, \|T(x)\|_Y \leq C\|x\|_X$. 
+\end{problem}
+
+\begin{solution}
+
+\pre Suppose $T$ is continuous, so the operator norm as described in problem 3 is well-defined. In the case that $x = 0$, any $C > 0$ satisfies $\|T(x)\|_Y \leq C\|x\|_X$ for all $x \in X$, so we can assume $x \neq 0$. In this case, we have the following: 
+
+\begin{align*}
+    \|T\|_{\mathcal{L}(X, Y)} &= \sup_{\|x\|_X = 1} \|T(x)\|_Y \\ 
+    &= \sup_{x \in X} \left\|T\left(\frac{x}{\|x\|_X}\right)\right\|_Y \\
+    &= \frac{1}{\|x\|_X} \|T(x)\|_Y
+\end{align*}
+
+\pre Then $\frac{\|T(x)\|_Y}{\|x\|_X} \leq \sup_{x \in X} \frac{\|T(x)\|_Y}{\|x\|_Y} = \|T\|_{\mathcal{L}(X, Y)}$. Thus, we let $C = \|T\|_{\mathcal{L}(X, Y)}$, and so for all $x \in X$, $\|T(x)\|_Y \leq C\|x\|_X$.
+
+\pre Now suppose that $\exists C > 0$ such that $\forall x \in X, \|T(x)\|_Y \leq C\|x\|_X$ and let $(x_n) \rarr x$. Then $\|x_n - x\| \rarr 0$ as $n \rarr \infty$. Since $T$ is linear, $\|T(x_n) - T(x)\| = \|T(x_n - x)\| \leq C\|x_n - x\| \rarr 0$. Thus, $T$ is continuous. 
+\end{solution}
+
+\begin{problem}{Problem 3}
+Let $X, Y$ be Banach spaces. Let $\mathcal{L}(X, Y)$ be the set of all continuous linear maps $T: X \rarr Y$. $\mathcal{L}(X, Y)$ is a vector space. 
+
+$$(T_1 + T_2)(x) = T_1(x) + T_2(x)$$
+$$(\alpha T)(x) = \alpha T(x)$$
+
+\noindent On the vector space $\mathcal{L}(X, Y)$, let 
+
+$$\|T\|_{\mathcal{L}(X, Y)} = \sup_{\|x\|_X = 1} \|T(x)\|_Y$$
+
+\noindent Prove that this is a norm on $\mathcal{L}(X, Y)$ and with this norm $\mathcal{L}(X, Y)$ is a Banach space. 
+\end{problem}
+
+\begin{solution}
+
+\pre To prove this is a norm, we will show it satisfies $\|T\|_{\mathcal{L}(X, Y)} = 0 \Leftrightarrow T = 0$, $\|\alpha T\|_{\mathcal{L}(X, Y)} = |\alpha|\|T\|_{\mathcal{L}(X, Y)}$, and $\|T_1 + T_2\|_{\mathcal{L}(X, Y)} \leq \|T_1\|_{\mathcal{L}(X, Y)} + \|T_2\|_{\mathcal{L}(X, Y)}$. 
+
+\pre First, suppose that $\|T\|_{\mathcal{L}(X, Y)} = 0$. Then $\|T(x)\|_Y = 0$ for all $x$ satisfying $\|x\|_X = 1$. Since $Y$ is a Banach space, $\|T(x)\|_Y = 0$ implies $T(x) = 0$ for $\|x\|_X = 1$. By linearity of $T$, this implies that $T(x) = 0$ for all $x \in X$, and so $T = 0$. Conversely, if $T = 0$, then $\sup_{\|x\|_X = 1} \|T(x)\|_Y = 0$, so $\|T\|_{\mathcal{L}(X, Y)} = 0$.
+
+\pre Second, \begin{align*}
+    \|\alpha T\|_{\mathcal{L}(X, Y)} &= \sup_{\|x\|_X = 1} \|\alpha T(x)\|_Y \\
+    &= \sup_{\|x\|_X = 1} |\alpha|\|T(x)\|_Y \\
+    &= |\alpha| \sup_{\|x\|_X = 1} \|T(x)\|_Y \\
+    &= |\alpha| \|T\|_{\mathcal{L}(X, Y)}
+\end{align*}
+
+\pre Third, \begin{align*}
+    \|T_1 + T_2\|_{\mathcal{L}(X, Y)} &= \sup_{\|x\|_X = 1} \|(T_1 + T_2)(x)\|_Y \\
+    &= \sup_{\|x\|_X = 1} \|T_1(x) + T_2(x)\|_Y \\
+    &\leq \sup_{\|x\|_X = 1} \|T_1(x)\|_Y + \|T_2(x)\|_Y \\
+    &= \sup_{\|x\|_X = 1} \|T_1(x)\|_Y + \sup_{\|x\|_X = 1} \|T_2(x)\|_Y \\
+    &= \|T_1\|_{\mathcal{L}(X, Y)} + \|T_2\|_{\mathcal{L}(X, Y)}
+\end{align*}
+
+\pre Thus, $\|\cdot \|_{\mathcal{L}(X, Y)}$ is a norm. 
+
+\pre Now we prove this is a Banach space by showing that it is a complete normed vector space. We have already defined a norm over $\mathcal{L}(X, Y)$, so it suffices to show that it is complete, that is, every Cauchy sequence converges. 
+
+\pre Let $(T_n)$ be a Cauchy sequence in $\mathcal{L}(X, Y)$, so for all $\epsilon > 0$, there exists an $N$ such that for all $n, m \geq N, \|T_n - T_m\|_{\mathcal{L}(X, Y)} < \epsilon$. By definition of the norm, $\|T_n - T_m\|_{\mathcal{L}(X, Y)} = \sup_{\|x\|_X = 1}\|(T_n - T_m)(x)\|_Y$, and since $T_n$ and $T_m$ are continuous linear maps, this equals $\sup_{\|x\|_X = 1}\|T_n(x) - T_m(x)\|_Y$. We therefore have that $\|T_n(x) - T_m(x)\|_Y \leq \|T_n - T_m\|_{\mathcal{L}(X, Y)} < \epsilon$. Since $Y$ is a Banach space, and we have just shown that $(T_n(x))$ is a Cauchy sequence in $Y$, $(T_n(x))$ is a convergent sequence in $Y$, and so we define $T(x) := \lim_{n\rarr \infty} T_n(x)$. We now prove that such a $T$ satisfies $T \in \mathcal{L}(X, Y)$, $(T_n) \rarr T$ in $\mathcal{L}(X, Y)$, and $(T_n) \rarr T$.
+
+\pre $T$ is clearly linear since it is defined as the limit of a sequence of linear maps. $T$ is also in $\mathcal{L}(X, Y)$ since it is defined as the limit of continuous functions which we will prove converge to $T$. Now, fix some $\epsilon > 0$. There exists an $N$ such that for all $n, m \geq N$, $\|T_n - T_m\|_{\mathcal{L}(X, Y)} \leq \epsilon/2$ since $(T_n)$ is Cauchy in $\mathcal{L}(X, Y)$. Thus, 
+
+\begin{align*}
+    \|T_n(x) - T(x)\|_Y &= \lim_{m \rarr\infty}\|T_n(x) - T_m(x)\|_Y \\
+    &\leq \lim\sup_{m\rarr\infty}\|T_n - T_m\|_{\mathcal{L}(X, Y)} \\
+    &\leq \epsilon/2
+\end{align*}
+
+\pre and this implies that $\|T_n - T\| \sup{m \rarr\infty}\|T_n(x) - T_m(x)\|_Y \leq \epsilon$, so $(T_n) \rarr T$. 
+
+\pre So, for any Cauchy sequence in $\mathcal{L}(X, Y)$, we have shown that it is a convergent sequence using the operator norm. Thus, $\mathcal{L}(X, Y)$ is a complete normed vector space, and so it is a Banach space using the operator norm.
+\end{solution}
+
+\begin{problem}{Problem 4}
+Take $X = \C^n$ and $Y = \C^m$. A linear map $T: X \rarr Y$ is given by an $m \times n$ matrix 
+$$A = \begin{bmatrix}
+    a_{11} & \dots & a_{1n} \\
+    \vdots &  & \vdots \\
+    a_{m1} & \dots & a_{mn}
+\end{bmatrix}$$
+
+\pre $T(x) = Ax$ (matrix vector multiplication).
+
+\pre Prove that $$\|T\| \leq \left(\sum \sum|a_{ij}|^2\right)^{1/2}$$
+\end{problem}
+
+\begin{solution}
+
+\pre We see that since $T(x) = Ax$, the $i^\text{th}$ component of $T(x)$ is equal to $\sum_{1 \leq j \leq n} a_{ij}x_j$, and so $\|T(x)\|^2_Y = \sum_{1 \leq i \leq m} \left| \sum_{1 \leq j \leq n} a_{ij}x_j\right|^2$. 
+
+\pre Applying the Cauchy-Schwarz inequality, we see that 
+\begin{align*}
+    \left| \sum_{1 \leq j \leq n} a_{ij}x_j\right|^2 &\leq \left(\sum_{1 \leq j \leq n} |a_{ij}|^2\right) \left(\sum_{1 \leq j \leq n} |x_j|^2\right) \\
+    &= \left(\sum_{1 \leq j \leq n} |a_{ij}|^2\right) \|x\|^2_X
+\end{align*}
+
+\pre Thus, \begin{align*}
+    \|T(x)\|^2_Y &\leq \sum_{1 \leq i \leq m} \left(\sum_{1 \leq j \leq n} |a_{ij}|^2\right) \|x\|^2_X \\
+    &= \left(\sum_{1 \leq i \leq m} \sum_{1 \leq j \leq n} |a_{ij}|^2\right)\|x\|_X^2
+\end{align*}
+
+\pre When we take the supremum of $\|T(x)\|_Y$ over all $x$ satisfying $\|x\|_X = 1$, the $\|x\|_X^2$ term cancels, and taking the square root of both sides, we are left with 
+
+\begin{align*}
+    \|T\| &= \sup_{\|x\|_X = 1} \|T(x)\|_Y \\
+    &\leq \left(\sum_{1 \leq i \leq m} \sum_{1 \leq j \leq n} |a_{ij}|^2\right)^{1/2}
+\end{align*}
+
+\pre which was the desired inequality.
+\end{solution}
+
+\begin{problem}{Problem 5}
+Let $$X = \{x = (x_m)_{m = 1}^\infty : x_m \in \C, \sum_{m =1}^\infty m^2|x_m|^2 < \infty\}$$
+
+\pre with the norm $\|x\|_X = \left(\sum_{m =1}^\infty m^2|x_m|^2\right)^{1/2}$. This is a Banach space. Let
+$$Y = \ell_{\N}^2 = \{x = (x_m)_{m = 1}^\infty : x_m \in \C, \sum_{m =1}^\infty |x_m|^2 < \infty \}$$ with the norm $\|x\|_Y = \left(\sum_{m =1}^\infty |x_m|^2\right)^{1/2}$, also a Banach space. Clearly $X \subset Y$. 
+\begin{itemize}
+    \item[(a)] Show that $X$ is dense in $Y$, i.e. $\bar{X} = Y$ where $\bar{X}$ denotes the closure of $X$ in $Y$.
+    \item[(b)] Let $B = \{x \in X : \|x\|_X \leq 1\}$. Show that $\bar{B}$ is compact in $Y$ ($\bar{B}$ = closure of $B$ in $Y$). In other words, show that for any sequence $(x_n)_{n=1}^\infty$ such that $\|x_n\|_X \leq 1$, there exists a sequence $(x_{n_k})_{k=1}^\infty$ such that $x_{n_k}$ converges in $Y$ (but not necessarily in $X$).
+\end{itemize}
+\end{problem}
+
+\begin{solution}
+\begin{itemize}
+    \item[(a)] Let $y \in Y$ and $U$ be a neighborhood of $y$. Then we can find a neighborhood $B = B(y, \epsilon)$ such that $y \in B \subset U$. If $z \in B$, then $\sum_{m=1}^\infty |y_m - z_m|^2 < \epsilon$. We will show that $B \cap X \neq \emptyset$, which shows that $\bar{X} = Y$. Since $y \in Y$, $\sum_{m=1}^\infty |y_m|^2 < \infty$. This implies that there exists an $N$ such that $\sum_{m=N}^\infty |y_m|^2 < \epsilon$. We define $x = (x_m)_{m=1}^\infty$ as follows:
+
+    $$x_m = \begin{cases}
+        y_m &\text{ if } m < N \\
+        0 &\text{ otherwise}
+    \end{cases}$$
+
+    Then $x \in B$ since $\sum_{m=1}^\infty |y_m - x_m| = \sum_{m=N}^\infty |y_m|^2 < \epsilon$, and $x \in U$ since $\sum_{m=1}^\infty m^2|x_m|^2 = \sum_{m=1}^{N-1} m^2|x_m|^2 < \infty$ since it is a finite sum. Thus $B \cap X \neq \emptyset$ and $B \cap X \subset U \cap X$. Since $y$ and $U$ were arbitrary, $\bar{X} = Y$.
+
+    \item[(b)] We will apply a diagonalization argument to construct a convergent subsequence. For a sequence $(x_n)_{n=1}^\infty$, each $x_n$ can be represented as $(x_{n,m})_{m=1}^\infty$. Then $(x_{n,1})_{n=1}^\infty$ is a sequence in $\C$ that is bounded since $\|x_n\|_X \leq 1$. Thus, we can construct a convergent subsequence $(x_{n(k), 1})_{k=1}^\infty$. From this subsequence, we get a new sequence $(x_{n(k),2})_{k=1}^\infty$ which uses the second component of each $x_n$. Since this is similarly bounded, we can take a convergent subsequence. In general, for a fixed $m$, we can find a convergent subsequence $(x_{n'(k),m})_{k=1}^\infty$ of the previous sequence $(x_{n(k),m-1})_{k=1}^\infty$. We define our convergent subsequence $(y_n)$ by letting $y_1$ be the first $x_n$ which appears in $(x_{n(k),1})_{k=1}^\infty$, $y_2$ be the second $x_n$ which appears in $(x_{n'(k),2})_{k=1}^\infty$, and in general $y_m$ being the $m^\text{th}$ $x_n$ which appears in $(x_{n'(k),m})_{k=1}^\infty$. We claim that $(y_n) \rarr y$ where $y_m$ is defined to be $\lim_{k\rarr \infty} x_{n(k), m}$, which is the limit of the convergent subsequence we found in the $m^\text{th}$ component. 
+
+    We will show convergence in $Y$ by showing that for any $\epsilon > 0$, there is an $N$ such that for $n \geq N$, we have $\|y_{n} - y\|_Y < \epsilon$. 
+
+    We have \begin{align*}
+        \|y_n - y\|^2_Y &= \sum_{m=1}^\infty |y_{nm} - y_m|^2 \\
+        &= \sum_{m=1}^M|y_{nm} - y_m|^2 + \sum_{m=M+1}^\infty |y_{nm} - y_m|^2
+    \end{align*}
+
+    Since $(y_{nm}) \rarr y_m$ by construction for all $n$, and since we are considering a finite number of terms, there is an $N_m$ such that for all $n \geq N_m$, we have $|y_{nm} - y_m|^2 < \frac{\epsilon^2}{2M}$. Then, the left sum is less than $\frac{\epsilon^2}{2}$.
+
+    Since $(y_n)$ is a subsequence of $(x_n)$ where $\|x_n\|_X \leq 1$, $\|y_n\|_X \leq 1$ for all $y_n$, and so $\sum_{m=1}^\infty m^2|y_{nm}|^2 \leq 1$ and $\sum_{m=1}^\infty m^2|y_{m}|^2 \leq 1$. We can thus bound $|y_{nm}|^2$ and $|y_{m}|^2$ by $\frac{1}{m^2}$, and so $|y_{nm} - y_m|^2 \leq 2|y_{nm}|^2 + 2|y_n|^2 \leq \frac{4}{m^2}$. Thus, we can bound the right sum by $\sum{m=M+1}^\infty \frac{4}{m^2}$. Since this is a convergent sum, we can choose an $M$ sufficiently large so that $\sum_{m=M+1}^\infty \frac{4}{m^2} < \frac{\epsilon^2}{2}$.
+
+    We have bounded both the left sum and the right sum by $\frac{\epsilon^2}{2}$, and so their sum is bounded by $\epsilon^2$. Thus, $\|y_n - y\|_Y^2 < \epsilon^2$ and so $\|y_n-y\|_Y^2 < \epsilon$ for a sufficient choice of $N_m$ and $M$. 
+    
+    Lastly, we must show that this $y$ is an element of $Y$, which we do by showing $\sum_{m=1}^\infty |y_m|^2 < \infty$. Since $(y_n)$ is a subsequence of $(x_n)$ which is a sequence in $X$, we can bound each $y_{nm}$ as $m^2|y_{nm}|^2 \leq 1$. Since, for a fixed $m$, $y_m$ was taken to be the limit of $(y_{nm})_{n=1}^\infty$, we have that for each $m$, $m^2|y_m|^2 \leq 1$, and so $|y_m|^2 \leq \frac{1}{m^2}$. Taking the sum over all $m$, we have that $\sum_{m=1}^\infty |y_m|^2 \leq \sum_{m=1}^\infty \frac{1}{m^2} < \infty$, and so $y \in Y$. 
+    
+    Thus, for any sequence $(x_n)$ in with $\|x\|_X \leq 1$, there is a convergent subsequence $(y_n)$ such that $(y_n)$ converges in $Y$. Since $Y$ is a Banach space and we have just shown that $\bar{B}$ is sequentially compact, $\bar{B}$ is compact. 
+\end{itemize}
+\end{solution}
+
+\begin{problem}{Problem 6}
+Let $C^{0, \gamma}(U)$ be the space of Holder continuous functions on $U \subset \R^d$. A function $f: U \rarr \C$ is called Holder continuous with exponent $0 < \gamma \leq 1$ if $\exists C > 0$ such that $\forall x \in U$, $|f(x)| \leq C$ and $\forall x_1, x_2 \in U$, $|f(x_2) - f(x_1)| \leq C|x_2 - x_1|^\gamma$. 
+
+\pre Prove that 
+
+$$\|f\|_{C^{0, \gamma}(U)} = \sup_{x \in U}|f(x)| + \sup_{x_1 \neq x_2, x_1, x_2 \in U} \frac{|f(x_2) - f(x_1)|}{|x_2 - x_1|^\gamma}$$
+
+\pre is a norm on $C^{0, \gamma}(U)$ and with this norm, $C^{0, \gamma}(U)$ is a Banach space.
+\end{problem}
+
+\begin{solution}
+
+\pre To prove this is a norm, we will show it satisfies $\|f\|_{C^{0, \gamma}(U)} = 0 \Leftrightarrow f = 0, \|\alpha f\|_{C^{0, \gamma}(U)} = |\alpha|\|f\|_{C^{0, \gamma}(U)}$, and $\|f_1 + f_2\|_{C^{0, \gamma}(U)} \leq \|f_1\|_{C^{0, \gamma}(U)} + \|f_2\|_{C^{0, \gamma}(U)}$ 
+
+\pre First, $f = 0$, then $\sup_{x \in U} |f(x)| = 0$ and $\sup_{x_1 \neq x_2, x_1, x_2 \in U}\frac{|f(x_2) - f(x_1)}{|x_2 - x_1|^\gamma} = 0$, and so $\|f\|_{C^{0, \gamma}(U)} = 0$. Conversely, if $\|f\|_{C^{0, \gamma}(U)} = 0$, then since each term in the sum is always non-negative, it must be that they are both equal to 0, and in particular, $\sup_{x \in U} |f(x)| = 0$. Thus, on $U$, $f(x) = 0$ for all $x$, and so $f = 0$. 
+
+\pre Second, 
+
+\begin{align*}
+    \|\alpha f\|_{C^{0, \gamma}(U)} &= \sup_{x \in U}|(\alpha f)(x)| + \sup_{x_1 \neq x_2, x_1, x_2 \in U}\frac{|(\alpha f)(x_2) - (\alpha f)(x_1)|}{|x_2 - x_1|^\gamma} \\
+    &= \sup_{x \in U}|\alpha (f(x))| + \sup_{x_1 \neq x_2, x_1, x_2 \in U}\frac{|\alpha (f(x_2)) - \alpha (f(x_1))|}{|x_2 - x_1|^\gamma} \\
+    &= \sup_{x \in U}|\alpha||f(x)| + \sup_{x_1 \neq x_2, x_1, x_2 \in U}|\alpha|\frac{|f(x_2) - f(x_1)|}{|x_2 - x_1|^\gamma} \\
+    &= |\alpha| \sup_{x \in U}|f(x)| + \sup_{x_1 \neq x_2, x_1, x_2 \in U}\frac{|f(x_2) - f(x_1)|}{|x_2 - x_1|^\gamma} \\
+    &= |\alpha|\|f\|_{C^{0, \gamma}(U)}
+\end{align*}
+
+\pre Third, 
+
+\begin{align*}
+    \|f + g\|_{C^{0, \gamma}(U)} &= \sup_{x \in U}|(f + g)(x)| + \sup_{x_1 \neq x_2, x_1, x_2 \in U} \frac{|(f+g)(x_2) - (f + g)(x_1)|}{|x_2 - x_1|^\gamma} \\
+    &= \sup_{x \in U}|f(x) + g(x)| + \sup_{x_1 \neq x_2, x_1, x_2 \in U} \frac{|f(x_2) - f(x_1) + g(x_2) - g(x_1)|}{|x_2 - x_1|^\gamma} \\
+    &\leq \sup_{x \in U}|f(x)| + |g(x)| + \sup_{x_1 \neq x_2, x_1, x_2 \in U} \frac{|f(x_2) - f(x_1)| + |g(x_2) - g(x_1)|}{|x_2 - x_1|^\gamma} \\
+    &= \sup_{x \in U}|f(x)| + \sup_{x\in U}|g(x)| + \sup_{x_1 \neq x_2, x_1, x_2 \in U} \frac{|f(x_2) - f(x_1)|}{|x_2 - x_1|^\gamma} + \sup_{x_1 \neq x_2, x_1, x_2 \in U} \frac{|g(x_2) - g(x_1)|}{|x_2 - x_1|^\gamma} \\
+    &= \|f\|_{C^{0, \gamma}(U)} + \|g\|_{C^{0, \gamma}(U)}
+\end{align*}
+
+\pre Thus, $\|\cdot\|_{C^{0, \gamma}(U)}$ is a norm.
+
+\pre Now we prove this is a Banach space by showing that it is complete, namely that every Cauchy sequence converges. 
+
+\pre Suppose that $(f_n)$ is a Cauchy sequence, so for ally $\epsilon > 0$, there is an $N$ such that for all $n, m \geq N$, we have $\|f_n - f_m\|_{C^{0, \gamma}(U)} < \epsilon$. By definition, 
+\begin{align*}
+    \|f_n - f_m\|_{C^{0, \gamma}(U)} &= \sup_{x \in U} |(f_n - f_m)(x)| + \sup_{x_1 \neq x_2, x_1, x_2 \in U}\frac{|(f_n - f_m)(x_2) - (f_n - f_m)(x_1)|}{|x_2 - x_1|^\gamma} \\ 
+    &= \sup_{x \in U} |f_n(x) - f_m(x)| + \sup_{x_1 \neq x_2, x_1, x_2 \in U}\frac{|f_n(x_2) - f_m(x_2) - f_n(x_1) - f_m(x_1)|}{|x_2 - x_1|^\gamma} \\
+    &< \epsilon
+\end{align*}
+
+\pre and so $\sup_{x \in U} |f_n(x) - f_m(x)| < \epsilon$. Since $\R^d$ is complete, this implies that we can define an $f := \lim_{n\rarr\infty}f_n$. We now show that $(f_n)$ converges to $f$ in $C^{0, \gamma}(U)$, which will prove that every Cauchy sequence in $C^{0, \gamma}(U)$ is convergent in $C^{0, \gamma}(U)$.
+
+\pre To show that $f \in C^{0, \gamma}(U)$, we see that
+
+\begin{align*}
+    \frac{|f(x_2) - f(x_1)|}{|x_2 - x_1|^\gamma} &= \frac{|f(x_2) + f_m(x_2) - f_m(x_2) + f_m(x_1) - f_m(x_1) - f(x_1)|}{|x_2 - x_1|^\gamma} \\
+    &\leq \frac{|f(x_2) + f_m(x_2)|}{|x_2 - x_1|^\gamma} + \frac{|f_m(x_2) - f_m(x_1)|}{|x_2 - x_1|^\gamma} + \frac{|f_m(x_1) - f(x_1)|}{|x_2 - x_1|^\gamma} 
+\end{align*}
+
+\pre The first and third term in this sum can be made arbitrarily small since $(f_n) \rarr f$ in $\R^d$, and the middle term can be bounded by some $C_m/2$ since $f_m \in C^{0, \gamma}(U)$. Thus, the entire sum can be bounded by $C_m$, so $|f(x_2) - f(x_1)| \leq C_m|x_2 - x_1|^\gamma$. 
+
+\pre We also note that $|f(x)| = |f(x) - f_m(x) + f_m(x)| \leq |f(x) - f_m(x)| + |f_m(x)|$. The first term can be made arbitrarily small since $(f_n) \rarr f$ in $\R^d$, and the second term is bounded by some $C_m/2$ since $f_m \in C^{0, \gamma}(U)$. Thus, $|f(x)| \leq C_m$. 
+
+\pre Both of these facts together imply that $f \in C^{0, \gamma}(U)$. Now we will show that $(f_n) \rarr f$ in $C^{0, \gamma}(U)$. 
+
+\pre To show convergence, we will show that for any $\epsilon > 0$, there exists an $N$ such that for all $n \geq N$, we have $\|f_n - f\|_{C^{0, \gamma}(U)} < \epsilon$
+
+\begin{align*}
+    \|f_n - f\| &= \sup_{x \in U}|f_n(x) - f(x)| + \sup_{x_1 \neq x_2, x_1, x_2 \in U} \frac{|f_n(x_2) - f(x_2) + f_n(x_1) - f(x_1)|}{|x_2 - x_1|^\gamma} \\
+    &= \sup_{x \in U}|f_n(x) - f(x)| + \sup_{x_1 \neq x_2, x_1, x_2 \in U} \frac{|f_n(x_2) - \lim_{k\rarr\infty}f_k(x_2) + f_n(x_1) - \lim_{k\rarr\infty}f_k(x_1)|}{|x_2 - x_1|^\gamma} \\
+    &= \sup_{x \in U}|f_n(x) - f(x)| + \lim_{k \rarr\infty} \sup_{x_1 \neq x_2, x_1, x_2 \in U} \frac{|f_m(x_2) - f_k(x_2) + f_m(x_1) - f_k(x_1)|}{|x_2 - x_1|^\gamma} \\
+    &\leq \sup_{x \in U}|f_n(x) - f(x)| + \lim_{k \rarr\infty} \sup_{x_1 \neq x_2, x_1, x_2 \in U} \frac{|f_m(x_2) - f_k(x_2)|}{|x_2 - x_1|^\gamma} + \sup_{x_1 \neq x_2, x_1, x_2 \in U} \frac{|f_m(x_1) - f_k(x_1)|}{|x_2 - x_1|^\gamma} \\
+    &< \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} \\
+    &= \epsilon
+\end{align*}
+
+\pre Since $(f_n) \rarr f$ in $\R^d$, there is an $N_1$ such that for all $n \geq N_1$, the first term is less than $\epsilon/3$. Since $(f_n)$ is a Cauchy sequence in $C^{0, \gamma}(U)$, there is an $N_2$ such that for all $n \geq N_2$, the second term is less than $\epsilon/3$. Similarly, there is an $N_3$ such that for all $n \geq N_3$, the third term is less than $\epsilon/3$. Letting $N = \max(N_1, N_2, N_3)$, we have that for all $n \geq N$, each term is less than $\epsilon/3$, and so their sum is less than $\epsilon$, which implies that $\|f_n - f\| < \epsilon$ for $n \geq N$. Thus, $(f_n) \rarr f$ in $C^{0, \gamma}(U)$.
+
+\pre We have demonstrated that $\|\cdot\|_{C^{0, \gamma}(U)}$ is a norm, and that with this norm, every Cauchy sequence in $C^{0, \gamma}(U)$ converges. Thus, $C^{0, \gamma}(U)$ is a Banach space. 
+\end{solution}
+
+\begin{problem}{Problem 7}
+Explain that the Arzela-Ascoli theorem shows that for each $0 < \gamma \leq 1$, $C^{0, \gamma}(\bar{U})$ is compactly embedded in $C^0(\bar{U})$, where $U \subset \R^d$ is bounded open. 
+\end{problem}
+
+\begin{solution}
+
+\pre Recall the following definitions:
+
+\pre \underline{Compactly Embedded:}
+
+\pre As defined in the notes, $X$ is compactly embedded in $Y$ if $X \subset Y$ and the closed unit ball of $X$ has compact closure in $Y$
+
+\pre \underline{Arzela-Ascoli Theorem:}
+
+\pre Let $X$ be a space and $(Y, d)$ be a metric space. Give $C(X, Y)$ the topology of compact convergence; let $F$ be a subset of $C(X, Y)$. If $F$ is equicontinuous under $d$ and the set $F_a = \{f(a) : f \in F\}$ has compact closure for each $a \in X$, then $F$ is contained in a compact subspace of $C(X, Y)$. The converse holds if $X$ is locally compact Hausdorff. 
+
+\pre First, we show that $C^{0, \gamma}(\bar{U}) \subset C^0(\bar{U})$. If $f \in C^{0, \gamma}(\bar{U})$, then $f$ is Holder continuous, and so for all $x_1, x_2 \in \bar{U}$, $|f(x_2) - f(x_1)| \leq C|x_2 - x_1|^\gamma$. For any $\epsilon > 0$, let $\delta = \sqrt[\gamma]{\frac{\epsilon}{C}}$. Then $|x_2 - x_1| \leq \delta$  implies that $|f(x_2) - f(x_1)| \leq C|x_2 - x_1|^\gamma < C\sqrt[\gamma]{\frac{\epsilon}{C}}^\gamma = \epsilon$. Thus, if $f$ is Holder continuous, then $f$ is continuous, and so $C^{0, \gamma}(\bar{U}) \subset C^0{\bar{U}}$.
+
+\pre Now we show that the closed unit ball of $C^{0, \gamma}(\bar{U})$ has compact closure in $C^0{\bar{U}}$. Let $B = \{f \in C^{0, \gamma}(\bar{U}) : \|f\|_{C^{0, \gamma}(U)} = 1\}$. 
+
+\pre For $f \in B$, $\sup_{x \in \bar{U}} |f(x)| \leq \|f\|_{C^{0, \gamma}(\bar{U})} = 1$, so $B$ is uniformly bounded. As well, for $a \in X$, $F_a = \{f(a) : f \in B\}$, $\bar{F_a}$ is closed and bounded and $f(a) \in \R^d$, by Heine-Borel, $\bar{F_a}$ is compact and so $F_a$ has compact closure. 
+
+\pre To show equicontinuity, we note that for all $x_1, x_2 \in \bar{U}$ and $f \in B$, we have $|f(x_2) - f(x_1)| \leq \|f\|_{C^{0, \gamma}(\bar{U}}|x_2 - x_1|^\gamma = |x_2 - x_1|^\gamma$. Thus, for any $\epsilon > 0$, let $\delta < \epsilon^{1/\gamma}$. Then $|x_2 - x_1| \leq \delta$ implies that $|f(x_2) - f(x_1)| \leq |x_2 - x_1|^\gamma < \epsilon$ for any $f \in B$. Thus, $B$ is equicontinuous. Thus, by the Arzela-Ascoli Theorem, $B$ is contained in a compact subspace of $C^0(\bar{U})$, and so $\bar{B}$ is a closed subspace of a compact subspace, so it is compact. 
+
+\pre Since $C^{0, \gamma}(\bar{U}) \subset C^0(\bar{U})$ and the closed unit ball of $C^{0, \gamma}(\bar{U})$ has compact closure in $C^0(\bar{U})$, $C^{0, \gamma}(\bar{U})$ is compactly embedded in $C^0(\bar{U})$.
+\end{solution}
+\end{document}
