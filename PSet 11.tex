@@ -26,10 +26,181 @@ Let $\L_{\text{iso}}(\R^n; \R^n)$ be the subset of $\L(\R^n; \R^n)$ of \underlin
 \end{problem}
 
 \begin{solution}
+\begin{itemize}
+    \item[(a)] Per the hint, we show first that the right side, $T$, is a well-defined element of $\L(\R^n; \R^n)$ and second that $(I + A)T = I, T(I+A) = I$.
+
+    \pre To show that $T$ is a well-defined element of $\L(\R^n; \R^n)$, we will show that it's norm is bounded and that it is a linear map from $\R^n$ to $\R^n$. 
+
+    \begin{align*}
+        \|T\| &= \left\|\sum_{k = 0}^\infty (-A)^k\right\| \\
+        &\leq \sum_{k = 0}^\infty \|A^k\| \\
+        &\leq \frac{1}{1 - \|A\|}
+    \end{align*}
+
+    \pre which is true since $A$ was defined such that $\|A\| < 1$. Thus $\|T\|$ is bounded. It is also clearly a linear map from $\R^n$ to $\R^n$ since it is the sum of linear maps from $\R^n$ to $\R^n$. Thus, $T \in \L(\R^n; \R^n)$.
+
+    \pre We have that $T$ is a right inverse of $I + A$ since
+
+    \pre \begin{align*}
+        (I + A)T &= (I + A)(I - A + A^2 - A^3 + \dots )\\
+        &= I^2 - IA + IA^2 - IA^3 + \dots + AI - A^2 + A^3 - \dots \\
+        &= I
+    \end{align*}
+
+    \pre And $T$ is also a left inverse of $I + A$ since 
+
+    \begin{align*}
+        T(A + I) &= (I - A + A^2 - A^3 + \dots)(I + A) \\
+        &= I^2 - AI + A^2I - A^3I + \dots + IA - A^2 + A^3 - \dots \\
+        &= I
+    \end{align*}
+
+    \pre Thus $I + A$ is invertible, and its inverse is given by $I - A + A^2 - A^3 + \dots $
+
+    \item[(b)] Per the hint, since $L \in \L_{\text{iso}}(\R^n;\R^n)$, $L^{-1}$ is well-defined, and so $L + A = L(I + L^{-1}A)$. Let $0 < \epsilon < \|L^{-1}\|$, so that for $\|A\| < \epsilon$, we have $\|L^{-1}A\| < 1$. Then by part (a), $I + L^{-1}A$ is invertible, and so $L(I + L^{-1}A) = L + A$ is invertible too. We have thus found an $\epsilon-$neighborhood of $L$ such that is contained in $\L_{\text{iso}}(\R^n;\R^n)$, and since $L$ was arbitrary, this means $\L_{\text{iso}}(\R^n;\R^n)$ is an open subset of $\L(\R^n;\R^n)$.
+
+    \item[(c)] Let $d(\text{inv})_I$ be the map which sends $A$ to $-A$ and let $O$ be the matrix consisting of all zeros. Then,
+
+    \begin{align*}
+        \lim_{A \rarr O}\frac{\text{inv}(I + A) - \text{inv}(I) - d(\text{inv})_I(A)}{\|A\|}
+        &= \lim_{A \rarr O}\frac{(I - A + A^2 - \dots) - I + A}{\|A\|} \\
+        &= \lim_{A \rarr O}\frac{A^2 - A^3 + A^4 - \dots}{\|A\|} \\
+        &= \lim_{A \rarr O} \frac{A^2}{\|A\|}(I - A + A^2 - \dots)\\
+        &= O
+    \end{align*}
     
+    \pre and so inv is differentiable at $I$, and its derivative is $d(\text{inv})_I(A) = -A$. To complete the problem, we now show that $d(\text{inv})_I$ is a linear map from $\L(\R^n;\R^n)$ to $\L(\R^n;\R^n)$.
+
+    \pre Clearly it is a linear map, since 
+    \begin{align*}
+        d(\text{inv})_I(A + B) &= - (A + B) \\
+        &= -A + -B \\
+        &= d(\text{inv})_I(A) + d(\text{inv})_I(B)
+    \end{align*}
+
+    \pre and 
+    \begin{align*}
+        d(\text{inv})_I(cA) &= -(cA) \\
+        &= c(-A) \\
+        &= cd(\text{inv})_I(A)
+    \end{align*}
+
+    \pre and if $A \in \L(\R^n; \R^n)$, then $-A \in \L(\R^n;\R^n)$ too. 
+
+    \item[(d)] Let $d(\text{inv})_L$ be the map which sends $A$ to $-L^{-1}AL^{-1}$ and let $O$ be the matrix consisting of all zeros. Then,
+
+    \begin{align*}
+        \lim_{A \rarr O}\frac{(L+A)^{-1} - L^{-1} - d(\text{inv}_L(A))}{\|A\|} &= \lim_{A \rarr O}\frac{(L^{-1} - L^{-1}AL^{-1} + (L^{-1}A)^2L^{-1} - \dots) - L^{-1} + L^{-1}AL^{-1}}{\|A\|} \\
+        &= \lim_{A \rarr O}\frac{(L^{-1}A)^2L^{-1} - (L^{-1}A)^3L^{-1} + \dots }{\|A\|} \\
+        &= O
+    \end{align*}
+
+    \pre and so for any $L \in \L_{\text{iso}}(\R^n;\R^n)$, we have $d(\text{inv})_L(A) = -L^{-1}AL^{-1}$.
+
+    \item[(e)] 
+\end{itemize}
 \end{solution}
 
 \begin{problem}{Problem 2}
+\begin{itemize}
+    \item[(a)] Suppose that 
+\[\begin{tikzcd}
+{\R^n} & {\R^m} \\
+U & V & {\R^p}
+\arrow[from=2-1, to=1-1]
+\arrow["f", from=2-1, to=2-2]
+\arrow[from=2-2, to=1-2]
+\arrow["g", from=2-2, to=2-3]
+\end{tikzcd}\]
+$f$ is differentiable at $p$, $g$ is twice differentiable at $f(p)$. 
+Let $F:U \rarr \L(\R^n; \R^m)$ be given by $$F(p) = dg_{f(p)}$$
+Use the chain rule to derive a formula for \begin{align*}
+    dF_p &\in \L(\R^n; \L(\R^m; \R^p)) \\
+    &\cong \L^2(\R^n, \R^m; \R^p)
+\end{align*} 
+
+$dF_p(h, k) = ??$
+\item[(b)] Suppose 
+$$L: U \rarr \L(\R^n; \R^m)$$
+$$K: U \rarr \L(\R^m; \R^p)$$
+Let $G(p) = K(p) \cdot L(p)$ so $G: U \rarr \L(\R^n; \R^p)$.
+Derive a formula for $$dG_p \in \L(\R^n; \L(\R^n; \R^p))$$
+
+\item[(c)] Suppose that 
+\[\begin{tikzcd}
+{\R^n} & {\R^m} \\
+U & V & {\R^p}
+\arrow[from=2-1, to=1-1]
+\arrow["f", from=2-1, to=2-2]
+\arrow[from=2-2, to=1-2]
+\arrow["g", from=2-2, to=2-3]
+\end{tikzcd}\]
+$f$ is twice differentiable at $p$, $g$ is twice differentiable at $f(p)$. The chain rule gives 
+$$d(g \circ f)_p = dg_{f(p)} \circ df_p$$
+$$d(g \circ f)_p \in \L(\R^n; \R^p)$$
+
+Use (a), (b) to find a formula for $$d^2(g \circ f)_p(h, k) \in \L^2(\R^n, \R^n; \R^p)$$
+$d^2(g \circ f)_p(h, k) = ??$
+\end{itemize}
+\end{problem}
+
+\begin{solution}
     
+\end{solution}
+
+\begin{problem}{Problem 3}
+Show that continuity of the differential is essential in the inverse function theorem by considering that function $f: (-1, 1) \rarr \R$ defined by $f(0) = 0$ and $f(t) = t + 2t^2\sin(1/t)$ for $t \neq 0$. Show that $f$ is everywhere differentiable, and even that $f'$ is bounded, that $f'(0) = 1$, but that $f$ is not injective in any neighborhood of $0$.
+\end{problem}
+
+\begin{solution}
+
+\pre For some point $t \neq 0$, we have:
+\begin{align*}
+    \lim_{h \rarr 0}\frac{f(t + h) - f(t)}{h} &= \lim_{h \rarr 0}\frac{(t+h) + 2(t+h)^2\sin(1/(t+h)) - t + 2t^2\sin(1/t)}{h} \\
+    &= \lim_{h \rarr 0}\frac{h + 2t^2\sin(1/(t+h)) + 4th\sin(1/(t+h)) + 2h^2\sin(1/(t+h)) + 2t^2\sin(1/t)}{h} \\
+    &= \lim_{h \rarr 0}1 + 4t\sin(1/(t+h)) + 2h\sin(1/(t+h)) + \frac{2t^2\sin(1/(t+h)) + 2t^2\sin(1/t)}{h} \\
+    &= 1 + 4t\sin(1/t) - 2\cos(1/t)
+\end{align*}
+
+\pre so $f$ is differentiable at $t \neq 0$.
+
+\pre At $t = 0$, we have
+
+\begin{align*}
+    \lim_{t \rarr 0}\frac{f(t) - f(0)}{t} &= \lim_{h \rarr 0}\frac{t+2t^2\sin(1/t)}{t} \\
+    &= \lim_{t \rarr 0}1 + 2t\sin(1/t) \\
+    &= 1
+\end{align*}
+
+\pre $f'$ is bounded since for $t \neq 0$, we have $\sin$ and $\cos$ bounded by 1, so on $(-1, 1)$, $1 + 4t\sin(1/t) - 2\cos(1/t)$ bounded by $1 + 4 + 2$, and for $t = 0$, $f' = 1$.
+
+\pre Since the series $(x_n)$ defined by $x_k = \frac{1}{2k\pi}$ approaches 0 are $n$ approaches infinity, and since $\sin(1/x_n)$ is $0$ for every $x_n$, every neighborhood of 0 will have multiple different inputs which $f$ evaluates to 0. Thus, $f$ is not injective in any neighborhood of 0.
+
+\end{solution}
+
+\begin{problem}{Problem 4}
+Define $g: \R^2 \rarr \R^2$ by $g(x,y) = (y\cos x, (x + y)\sin y)$, and $f: \R^2 \rarr \R^3$ by $f(x, y) = (x^2 - y, 3x - 2y, 2xy + y^2)$.
+\begin{itemize}
+    \item[(a)] Show that $g$ maps a neighborhood of $(0, 2\pi)$ bijectively to a neighborhood of $(\pi/2, \pi/2)$.
+    \item[(b)] If $h = f \circ g^{-1}$, find the matrix $h'(\pi/2, \pi/2)$.
+\end{itemize}
+\end{problem}
+
+\begin{solution}
+    
+\end{solution}
+
+\begin{problem}{Problem 5}
+The equations
+\begin{align*}
+    uz - 2e^{vz} &= 0, \\
+    u - x^2 - y^2 &= 0, \\
+    v^2 - xy\log v - 1 &= 0,
+\end{align*}
+define $z$ (implicitly) as a function of $(u, v)$, and $(u, v)$ as a function of $(x, y)$, thus $z$ is a function of $(x, y)$.
+
+Describe the role of the inverse and implicit function theorems in the above statement, and compute 
+$$\frac{\partial z}{\partial x}(0, e).$$
+(Note that when $x = 0$ and $y = e$, $u = e^2, v = 1,$ and $z = 2$.)
 \end{problem}
 \end{document}
